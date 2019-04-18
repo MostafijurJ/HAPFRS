@@ -102,9 +102,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         btnUpload = (Button) findViewById(R.id.btnUpload);
         imageView = (ImageView) findViewById(R.id.imgView);
 
-        mAuth = FirebaseAuth.getInstance();
-
-
 
 
         if(mAuth.getCurrentUser() == null){
@@ -114,6 +111,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(this, MainActivity.class));
         }
 
+        mAuth = FirebaseAuth.getInstance();
         //getting current user
         FirebaseUser user = mAuth.getCurrentUser();
 

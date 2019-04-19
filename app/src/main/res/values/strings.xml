@@ -32,5 +32,13 @@
         <item>Female</item>
     </array>
 
+    <array name="PalLevel">
+        <item>Extremly Inactive (Patient)</item>
+        <item>Sedentery (Little excercise)</item>
+        <item>Moderatly Active(Concious person)</item>
+        <item>Strongly Active(Laborious worker)</item>
+        <item>Extremly active (Professional Athlete)</item>
+    </array>
+
 
 </resources>

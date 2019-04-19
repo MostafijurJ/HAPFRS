@@ -119,27 +119,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="15dp"
+        android:padding="5dp"
         >
 
         <TextView
             android:id="@+id/tvPAL"
-            android:layout_width="wrap_content"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="PAL :"
+            android:text="Today's Activity:"
             android:textSize="14sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/PAL"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint=" pal"
-            android:inputType="numberDecimal"
-            android:textSize="14sp"
-       />
+        <Spinner
+            android:id="@+id/palspiner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
+        </Spinner>
+
 
     </LinearLayout>
 
@@ -147,23 +145,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
         >
         <Button
             android:id="@+id/btnbmi"
-            android:layout_width="match_parent"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:text="BMI"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:background="@drawable/status"
+            />
 
         <Button
             android:id="@+id/btnhistory"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="History"
-            android:textSize="14sp"
-            android:textStyle="bold"
+            android:background="@drawable/history"
             />
 
     </LinearLayout>

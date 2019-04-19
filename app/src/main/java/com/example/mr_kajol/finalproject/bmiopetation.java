@@ -50,7 +50,7 @@ import static java.lang.Math.floor;
 public class bmiopetation extends AppCompatActivity implements View.OnClickListener {
 
     Button bmibtn, Historybtn,buttonLogout;
-    EditText height, pal;
+    EditText height;
     EditText weight;
 
     TextView tvheight;
@@ -63,7 +63,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
     Spinner heightunits;
     Spinner weightunits;
-    Spinner genderspiner;
+    Spinner palspiner;
 
     private Button btnChoose, btnUpload;
     private ImageView imageView;
@@ -74,7 +74,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
     private  FirebaseAuth mAuth;
 
-    int heightindex, weightindex;
+    int heightindex, weightindex,palindex;
     Double heightincm, weightinkg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +85,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         bmibtn = findViewById(R.id.btnbmi);
         height = findViewById(R.id.height);
         weight = findViewById(R.id.weight);
-        pal = findViewById(R.id.PAL);
 
         tvheight = findViewById(R.id.tvheight);
         tvweight = findViewById(R.id.tvWeight);
@@ -94,7 +93,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
         heightunits = findViewById(R.id.heightunits);
         weightunits = findViewById(R.id.weightunits);
-        genderspiner = findViewById(R.id.genderspiner);
+        palspiner = findViewById(R.id.palspiner);
         showdata = findViewById(R.id.showdata);
 
         btnChoose = (Button) findViewById(R.id.btnChoose);
@@ -139,6 +138,11 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         weightadepter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         weightunits.setAdapter(weightadepter);
 
+        // Pal Spiner
+        ArrayAdapter<CharSequence> paladepter = ArrayAdapter.createFromResource(this,R.array.PalLevel, android.R.layout.simple_spinner_item);
+        weightadepter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        palspiner.setAdapter(paladepter);
+
 
         weightunits.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -165,6 +169,18 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        palspiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                palindex = position;
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
+
 
 
         // Retriving Data from Server
@@ -177,15 +193,15 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String Height = dataSnapshot.child("Height").getValue().toString();
                 String Weight = dataSnapshot.child("Weight").getValue().toString();
-                String PAL = dataSnapshot.child("PAL").getValue().toString();
+               // String PAL = dataSnapshot.child("PAL").getValue().toString();
 
                 if(Height==null) Height = "00";
                 else if(Weight==null)Weight= "00";
-                    else if(PAL==null) PAL ="00";
+                    //else if(PAL==null) PAL ="00";
 
                 height.setText(Height);
                 weight.setText(Weight);
-                pal.setText(PAL);
+                //pal.setText(PAL);
 
             }
 
@@ -209,7 +225,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
             Double Height = Double.parseDouble(height.getText().toString());
             Double Weight = Double.parseDouble(weight.getText().toString());
-            Double PAL = Double.parseDouble(pal.getText().toString());
 
             //for height
             if(heightindex == 0){
@@ -235,9 +250,28 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                 WeighttoStore = weightinkg.toString();
             }
 
+            //defining physical Activity level
+                double palscore=0;
+
+                if(palindex == 0){
+                    palscore = 1.4;
+                }
+                else if(palindex == 1){
+                  palscore = 1.55;
+                } else if(palindex == 2){
+                  palscore = 1.85;
+                }else if(palindex == 3){
+                  palscore = 2.20;
+                }
+                else if(palindex == 4){
+                  palscore = 2.4;
+                }
+
+                String pal = new DecimalFormat("##.##").format(palscore).trim();
+
                 String passHeight =  HighttoStore.trim();
                 String passWeight =  WeighttoStore.trim();
-                String pal = PAL.toString().trim();
+
 
             FirebaseUser user = mAuth.getCurrentUser();
             FirebaseDatabase data = FirebaseDatabase.getInstance();
@@ -249,6 +283,8 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                         passWeight,
                       pal
                 );
+
+
               Map<String,Object> map = updateClass.toMap();
 
                 String userid = user.getUid();

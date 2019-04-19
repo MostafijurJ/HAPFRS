@@ -7,4 +7,5 @@
     <color name="colorHint">#959595</color>
     <color name="colorButtonTransparent">#be050505</color>
     <color name="sample">#9fe1ad</color>
+    <color name="white">#FFF5F5F5</color>
 </resources>

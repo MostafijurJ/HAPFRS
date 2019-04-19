@@ -5,10 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/middle"
     android:weightSum="50"
     tools:context=".bmiopetation">
 
     <LinearLayout
+        android:layout_marginTop="5dp"
         android:id="@+id/layout_button"
         android:orientation="horizontal"
         android:layout_alignParentTop="true"
@@ -245,14 +247,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:text="show dajdghjdghjdhjdgta"
+        android:text="show"
 
         />
 
     <Button
         android:id="@+id/buttonLogout"
-        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logout" />
+        android:layout_gravity="center"
+        android:background="@drawable/logout"
+
+        />
 
 </LinearLayout>

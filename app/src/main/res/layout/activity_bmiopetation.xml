@@ -38,66 +38,10 @@
         android:layout_height="wrap_content">
 
         <ImageView
-           android:layout_marginLeft="120dp"
             android:id="@+id/imgView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="15dp">
-
-            <TextView
-                android:id="@+id/tvsex"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="SEX :"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/genderspiner"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-             />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:id="@+id/tvage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Age :"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/UserAge"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="age"
-                android:inputType="number"
-                android:padding="10dp"
-                android:textSize="14sp" />
-        </LinearLayout>
-
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
@@ -135,8 +79,7 @@
             android:id="@+id/heightunits"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:contextClickable="true"
-            />
+            android:contextClickable="true" />
 
     </LinearLayout>
 

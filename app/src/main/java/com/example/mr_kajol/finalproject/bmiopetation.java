@@ -50,7 +50,7 @@ import static java.lang.Math.floor;
 public class bmiopetation extends AppCompatActivity implements View.OnClickListener {
 
     Button bmibtn, Historybtn,buttonLogout;
-    EditText height,age, pal;
+    EditText height, pal;
     EditText weight;
 
     TextView tvheight;
@@ -70,11 +70,11 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
     private Uri filePath;
 
 
-    private   final int PICK_IMAGE_REQUEST  = 71;
+    private   final int PICK_IMAGE_REQUEST  = 1;
 
     private  FirebaseAuth mAuth;
 
-    int heightindex, weightindex,genderindex;
+    int heightindex, weightindex;
     Double heightincm, weightinkg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +86,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         height = findViewById(R.id.height);
         weight = findViewById(R.id.weight);
         pal = findViewById(R.id.PAL);
-        age = findViewById(R.id.UserAge);
 
         tvheight = findViewById(R.id.tvheight);
         tvweight = findViewById(R.id.tvWeight);
@@ -129,10 +128,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         btnChoose.setOnClickListener(this);
         btnUpload.setOnClickListener(this);
 
-        // GENDER
-        ArrayAdapter<CharSequence> gender = ArrayAdapter.createFromResource(this,R.array.SEX, android.R.layout.simple_spinner_item);
-        gender.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        genderspiner.setAdapter(gender);
 
         //Height
         ArrayAdapter<CharSequence> heightadepter = ArrayAdapter.createFromResource(this,R.array.heightunits, android.R.layout.simple_spinner_item);
@@ -144,18 +139,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         weightadepter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         weightunits.setAdapter(weightadepter);
 
-        genderspiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                //Toast.makeText(MainActivity.this," Gender ", Toast.LENGTH_LONG).show();
-
-                genderindex = position;
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
-        });
 
         weightunits.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -194,17 +177,14 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String Height = dataSnapshot.child("Height").getValue().toString();
                 String Weight = dataSnapshot.child("Weight").getValue().toString();
-                String Age = dataSnapshot.child("Age").getValue().toString();
                 String PAL = dataSnapshot.child("PAL").getValue().toString();
 
                 if(Height==null) Height = "00";
                 else if(Weight==null)Weight= "00";
-                    else if(Age==null) Age ="00";
                     else if(PAL==null) PAL ="00";
 
                 height.setText(Height);
                 weight.setText(Weight);
-                age.setText(Age);
                 pal.setText(PAL);
 
             }
@@ -257,7 +237,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
                 String passHeight =  HighttoStore.trim();
                 String passWeight =  WeighttoStore.trim();
-                String Age = age.getText().toString().trim();
                 String pal = PAL.toString().trim();
 
             FirebaseUser user = mAuth.getCurrentUser();
@@ -268,7 +247,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
                         passHeight,
                         passWeight,
-                        Age,
                       pal
                 );
               Map<String,Object> map = updateClass.toMap();
@@ -307,7 +285,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
             String dc = new DecimalFormat("##.##").format(bmi);
             tvshowbmi.setText("Your BMI is : " + dc);
 
-           /* ///bmi status
+           //bmi status
             String Status = "Current Status: ";
             String Status1 = "Very severely underweight.";
             String Status2 = "Severely underweight";
@@ -333,7 +311,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                 if(StatusCheck(bmi)==55){
                     tvbmistatus.setText(Status+"Strongly OverWeight");
                 }
-            */
 
             break;
         }
@@ -413,7 +390,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
             progressDialog.show();
 
             //"images/"+
-            StorageReference ref = storageReference.child(UUID.randomUUID().toString());
+            StorageReference ref = storageReference.child("Image/"+UUID.randomUUID().toString());
            // StorageReference childRef = ref.child("image.jpg");
             ref.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

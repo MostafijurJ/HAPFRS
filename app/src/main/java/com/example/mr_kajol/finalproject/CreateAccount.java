@@ -6,8 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -16,15 +19,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-
+import static java.lang.Math.floor;
 
 
 public class CreateAccount extends AppCompatActivity  implements View.OnClickListener {
 
-    private EditText editTextName, editTextEmail, editTextPassword, editTextPhone;
+    private EditText editTextName, editTextEmail, editTextPassword, editTextPhone, Age;
     private ProgressBar progressBar;
+    Spinner genderspiner;
 
     private FirebaseAuth mAuth;
+    int genderindex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +40,33 @@ public class CreateAccount extends AppCompatActivity  implements View.OnClickLis
         editTextEmail = findViewById(R.id.edit_text_email);
         editTextPassword = findViewById(R.id.edit_text_password);
         editTextPhone = findViewById(R.id.edit_text_phone);
-       /* progressBar = findViewById(R.id.progressbar);
-        progressBar.setVisibility(View.GONE);*/
+        Age = findViewById(R.id.UserAge);
+        genderspiner = findViewById(R.id.genderspiner);
+
+
 
         mAuth = FirebaseAuth.getInstance();
 
         findViewById(R.id.button_register).setOnClickListener(this);
+
+
+        // GENDER
+        ArrayAdapter<CharSequence> gender = ArrayAdapter.createFromResource(this,R.array.SEX, android.R.layout.simple_spinner_item);
+        gender.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        genderspiner.setAdapter(gender);
+
+        genderspiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                //Toast.makeText(MainActivity.this," Gender ", Toast.LENGTH_LONG).show();
+
+                genderindex = position;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
     }
 
 
@@ -58,6 +84,9 @@ public class CreateAccount extends AppCompatActivity  implements View.OnClickLis
         final String email = editTextEmail.getText().toString().trim();
         final String password = editTextPassword.getText().toString().trim();
         final String phone = editTextPhone.getText().toString().trim();
+        final String age = Age.getText().toString().trim();
+
+
 
         if (name.isEmpty()) {
             editTextName.setError(getString(R.string.input_error_name));
@@ -94,16 +123,29 @@ public class CreateAccount extends AppCompatActivity  implements View.OnClickLis
             editTextPhone.requestFocus();
             return;
         }
-
+        if (age.isEmpty()) {
+            editTextPhone.setError(getString(R.string.input_error_age));
+            editTextPhone.requestFocus();
+            return;
+        }
         if (phone.length() != 11) {
             editTextPhone.setError(getString(R.string.input_error_phone_invalid));
             editTextPhone.requestFocus();
             return;
         }
 
+       /* String sex="";
+
+        if(genderindex == 0){
+            sex ="Male";
+        }
+        else if(genderindex == 1){
+            sex = "Female";
+        }*/
+
 
         // progressBar.setVisibility(View.VISIBLE);
-         final String height="",weight="",sex="Male",age="", pal = "00";
+         final String height="",weight="", pal = "00";
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -111,6 +153,15 @@ public class CreateAccount extends AppCompatActivity  implements View.OnClickLis
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()) {
+
+                            String sex="";
+
+                            if(genderindex == 0){
+                                sex ="Male";
+                            }
+                            else if(genderindex == 1){
+                                sex = "Female";
+                            }
 
                             User user = new User(
                                     name,

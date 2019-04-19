@@ -4,17 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UpdateClass {
-   public String Height, Weight, Age,PAL;
+   public String Height, Weight,PAL;
 
     UpdateClass() {
 
     }
 
 
-    public UpdateClass(String Height, String Weight, String Age,String PAL) {
+    public UpdateClass(String Height, String Weight,String PAL) {
         this.Height = Height;
         this.Weight = Weight;
-        this.Age = Age;
         this.PAL = PAL;
     }
 
@@ -22,7 +21,6 @@ public class UpdateClass {
         HashMap<String, Object> result = new HashMap<>();
         result.put("Height", Height);
         result.put("Weight", Weight);
-        result.put("Age", Age);
         result.put("PAL", PAL);
 
         return result;

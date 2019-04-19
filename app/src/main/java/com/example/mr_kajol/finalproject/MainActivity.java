@@ -114,24 +114,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             }
                         });
 
-
-                /*
-                DatabaseReference kk = MyRefff.child(UserName);
-                Map<String,String> User= new HashMap<String,String>();
-
-                User.put("UserName: ", UserName);
-                User.put("PassWord: ", UserPass);
-                kk.setValue(User);
-
-
-                 data = text.getText().toString();
-                String id = mydata.push().getKey();
-                mydata.child(id).setValue(data);
-                Toast.makeText(MainActivity.this, "Data Goes", Toast.LENGTH_LONG).show();
-
-               Intent i = new Intent(this, bmiopetation.class);
-                startActivity(i);*/
-
              break;
             }
             case R.id.signupbtn:{

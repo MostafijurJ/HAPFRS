@@ -121,11 +121,12 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         showdata.setText("Welcome : "+user.getEmail());
 
 
-        Historybtn.setOnClickListener(this);
+
         bmibtn.setOnClickListener(this);
         buttonLogout.setOnClickListener(this);
         btnChoose.setOnClickListener(this);
         btnUpload.setOnClickListener(this);
+        Historybtn.setOnClickListener(this);
 
         // GENDER
         ArrayAdapter<CharSequence> gender = ArrayAdapter.createFromResource(this,R.array.SEX, android.R.layout.simple_spinner_item);
@@ -176,7 +177,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
+
             }
         });
 

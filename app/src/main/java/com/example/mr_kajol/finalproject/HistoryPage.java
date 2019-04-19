@@ -33,14 +33,6 @@ public class HistoryPage extends AppCompatActivity {
     ArrayList<String> arrayList = new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
 
-    private static final String TAG = "ViewInformation";
-    private FirebaseDatabase mFirebaseDatabase;
-    private FirebaseAuth auth;
-    private FirebaseAuth.AuthStateListener authListener;
-    private DatabaseReference mRef;
-    String userID;
-    private ListView mListView;
-
 
     private  FirebaseAuth mAuth;
     TextView tv;
@@ -54,59 +46,56 @@ public class HistoryPage extends AppCompatActivity {
 
         tv = findViewById(R.id.tv);
 
-        mListView = findViewById(R.id.HistiryView);
-
-        mRef = mFirebaseDatabase.getReference();
-
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        if (mAuth.getCurrentUser() == null) {
+            //handle the already login user
+            Toast.makeText(HistoryPage.this,"No User found",Toast.LENGTH_LONG).show();
+           Intent i = new Intent(HistoryPage.this, bmiopetation.class);
+            startActivity(i);
+        }
+        else{
 
-            final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            authListener = new FirebaseAuth.AuthStateListener() {
+            FirebaseUser FUser = mAuth.getCurrentUser();
+            String userid = FUser.getUid();
+
+            tv.setText(userid);
+            DatabaseReference DR;
+            DR = FirebaseDatabase.getInstance().getReference().child("Users").child(userid);
+            DR.addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                    FirebaseUser user = firebaseAuth.getCurrentUser();
-                    if (user == null) {
-                        startActivity(new Intent(HistoryPage.this, MainActivity.class));
-                        finish();
-                    }
-                    else {
-                        userID = user.getUid();
-                        mRef.child(userID).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                Toast.makeText(getApplicationContext(), "Showing Details...", Toast.LENGTH_SHORT).show();
-                                showData(dataSnapshot);
-                            }
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String Height =  dataSnapshot.child("Height").getValue().toString();
+                    String Weight = dataSnapshot.child("Weight").getValue().toString();
+                    String Age = dataSnapshot.child("Age").getValue().toString();
+                    String PAL = dataSnapshot.child("PAL").getValue().toString();
+                    String Name = dataSnapshot.child("Name").getValue().toString();
+                    String Email = dataSnapshot.child("Email").getValue().toString();
+                    String Contact_No = dataSnapshot.child("Phone").getValue().toString();
 
-                            private void showData(DataSnapshot ds) {
+                    tv.setText("User_Name : "+ Name +"\n" + "User_Email : "+ Email +"\n" +"Height: "+ Height +"\n" + "Weight : " +
+                            Weight + "\n" + "Age : "+ Age + "\n" + "Physical Activity Level : " +PAL);
+                    /*arrayList.add(Height);
+                    arrayList.add(Weight);
+                    arrayList.add(Age);
+                    arrayList.add(PAL);
 
-                                HitoryGetSet uInfo = new HitoryGetSet();
-                                uInfo.setName(ds.child(userID).child("Name").getValue(HitoryGetSet.class).getName());
-
-
-                                ArrayList<String> array = new ArrayList<>();
-                                array.add(uInfo.getName());
+                    arrayAdapter = new ArrayAdapter(HistoryPage.this, android.R.layout.simple_list_item_1,arrayList);
+                    listView.setAdapter(arrayAdapter);*/
 
 
-                                ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,array);
-                                mListView.setAdapter(adapter);
-
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                throw databaseError.toException(); // never ignore errors
-                            }
-                        });
-                    }
                 }
-            };
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                }
+
+            });
+        }
     }
 }

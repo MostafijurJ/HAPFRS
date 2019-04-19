@@ -55,13 +55,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mAuth = FirebaseAuth.getInstance();
 
-       /*  // mydata = FirebaseDatabase.getInstance().getReference("FinalData");
-
-        FirebaseDatabase data = FirebaseDatabase.getInstance();
-        DatabaseReference MyRefff = data.getReference("LoginSystem");
-
-      String id = mydata.push().getKey();
-        mydata.child(id).setValue("Kajol");*/
 
     }
 
@@ -82,9 +75,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
 
             case R.id.loginbtn: {
-
-             /*   FirebaseDatabase data = FirebaseDatabase.getInstance();
-                DatabaseReference MyRefff = data.getReference("LoginSystem");*/
 
                 String UserName = LoginUserName.getText().toString();
                 String UserPass = LoginUserPAss.getText().toString();
@@ -113,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 }
                             }
                         });
-
              break;
             }
             case R.id.signupbtn:{

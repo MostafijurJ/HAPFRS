@@ -102,6 +102,9 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         btnUpload = (Button) findViewById(R.id.btnUpload);
         imageView = (ImageView) findViewById(R.id.imgView);
 
+        mAuth = FirebaseAuth.getInstance();
+
+
 
 
         if(mAuth.getCurrentUser() == null){
@@ -111,7 +114,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(this, MainActivity.class));
         }
 
-        mAuth = FirebaseAuth.getInstance();
         //getting current user
         FirebaseUser user = mAuth.getCurrentUser();
 
@@ -121,12 +123,11 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         showdata.setText("Welcome : "+user.getEmail());
 
 
-
+        Historybtn.setOnClickListener(this);
         bmibtn.setOnClickListener(this);
         buttonLogout.setOnClickListener(this);
         btnChoose.setOnClickListener(this);
         btnUpload.setOnClickListener(this);
-        Historybtn.setOnClickListener(this);
 
         // GENDER
         ArrayAdapter<CharSequence> gender = ArrayAdapter.createFromResource(this,R.array.SEX, android.R.layout.simple_spinner_item);
@@ -177,7 +178,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-
+                // your code here
             }
         });
 
@@ -358,9 +359,9 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
             case R.id.btnhistory:{
                //redirect to histiry Page
 
-                Intent i = new Intent(bmiopetation.this,HistoryPage.class);
+                Intent i = new Intent(bmiopetation.this, HistoryPage.class);
                 startActivity(i);
-               break;
+                break;
             }
 
         }

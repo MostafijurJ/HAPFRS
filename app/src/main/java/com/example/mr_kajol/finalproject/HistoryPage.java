@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class HistoryPage extends AppCompatActivity {
@@ -30,41 +33,80 @@ public class HistoryPage extends AppCompatActivity {
     ArrayList<String> arrayList = new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
 
+    private static final String TAG = "ViewInformation";
+    private FirebaseDatabase mFirebaseDatabase;
+    private FirebaseAuth auth;
+    private FirebaseAuth.AuthStateListener authListener;
+    private DatabaseReference mRef;
+    String userID;
+    private ListView mListView;
+
 
     private  FirebaseAuth mAuth;
+    TextView tv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_page);
 
-       /* FirebaseUser FUser = mAuth.getCurrentUser();
-        String userid = FUser.getUid();
-        DatabaseReference DR;
-        DR = FirebaseDatabase.getInstance().getReference().child("Users").child(userid);
-        DR.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String Height =  dataSnapshot.child("Height").getValue().toString();
-                String Weight = dataSnapshot.child("Weight").getValue().toString();
-                String Age = dataSnapshot.child("Age").getValue().toString();
-                String PAL = dataSnapshot.child("PAL").getValue().toString();
+        mAuth = FirebaseAuth.getInstance();
 
-                arrayList.add(Height);
-                arrayList.add(Weight);
-                arrayList.add(Age);
-                arrayList.add(PAL);
+        tv = findViewById(R.id.tv);
 
-               arrayAdapter = new ArrayAdapter(HistoryPage.this, android.R.layout.simple_list_item_1,arrayList);
-                listView.setAdapter(arrayAdapter);
+        mListView = findViewById(R.id.HistiryView);
+
+        mRef = mFirebaseDatabase.getReference();
 
 
-}
+    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+    @Override
+    protected void onStart() {
+        super.onStart();
 
-            }
+            final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            authListener = new FirebaseAuth.AuthStateListener() {
+                @Override
+                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                    if (user == null) {
+                        startActivity(new Intent(HistoryPage.this, MainActivity.class));
+                        finish();
+                    }
+                    else {
+                        userID = user.getUid();
+                        mRef.child(userID).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                Toast.makeText(getApplicationContext(), "Showing Details...", Toast.LENGTH_SHORT).show();
+                                showData(dataSnapshot);
+                            }
 
-        });*/
+                            private void showData(DataSnapshot ds) {
+
+                                HitoryGetSet uInfo = new HitoryGetSet();
+                                uInfo.setName(ds.child(userID).child("Name").getValue(HitoryGetSet.class).getName());
+
+
+                                ArrayList<String> array = new ArrayList<>();
+                                array.add(uInfo.getName());
+
+
+                                ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,array);
+                                mListView.setAdapter(adapter);
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                throw databaseError.toException(); // never ignore errors
+                            }
+                        });
+                    }
+                }
+            };
+
+
     }
 }

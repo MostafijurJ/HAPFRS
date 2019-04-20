@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -19,13 +21,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class HistoryPage extends AppCompatActivity {
+public class HistoryPage extends AppCompatActivity implements OnClickListener {
 
     ListView listView;
     FirebaseDatabase firebaseDatabase;
@@ -35,7 +38,8 @@ public class HistoryPage extends AppCompatActivity {
 
 
     private  FirebaseAuth mAuth;
-    TextView tv;
+    TextView tv,tvhistory;
+    Button histo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,10 @@ public class HistoryPage extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         tv = findViewById(R.id.tv);
+        histo = findViewById(R.id.historybtn);
+        tvhistory = findViewById(R.id.tvhistory);
+
+       histo.setOnClickListener(this);
 
 
     }
@@ -79,14 +87,6 @@ public class HistoryPage extends AppCompatActivity {
 
                     tv.setText("User_Name : "+ Name +"\n" + "User_Email : "+ Email +"\n" +"Height: "+ Height +"\n" + "Weight : " +
                             Weight + "\n" + "Age : "+ Age + "\n" + "Physical Activity Level : " +PAL);
-                    /*arrayList.add(Height);
-                    arrayList.add(Weight);
-                    arrayList.add(Age);
-                    arrayList.add(PAL);
-
-                    arrayAdapter = new ArrayAdapter(HistoryPage.this, android.R.layout.simple_list_item_1,arrayList);
-                    listView.setAdapter(arrayAdapter);*/
-
 
                 }
 
@@ -96,6 +96,45 @@ public class HistoryPage extends AppCompatActivity {
                 }
 
             });
+        }
+    }
+
+
+    @Override
+    public void onClick(View v) {
+
+        switch(v.getId()){
+            case R.id.historybtn:{
+
+
+        FirebaseUser FUser = mAuth.getCurrentUser();
+        String userid = FUser.getUid();
+
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference ref = database.child("HistoryTable");
+
+       //  HitoryGetSet  hitoryGetSet = new HitoryGetSet();
+        String Temp="" ;
+        Query phoneQuery = ref.orderByChild("4UserId").equalTo(userid);
+        Temp =  phoneQuery.toString();
+        tvhistory.setText(Temp);
+        phoneQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
+                    HitoryGetSet hitoryGetSet = singleSnapshot.getValue(HitoryGetSet.class);
+                    tvhistory.setText((CharSequence) hitoryGetSet);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+               // Log.e(TAG, "onCancelled", databaseError.toException());
+            }
+        });
+
+        break;
+            }
+
         }
     }
 }

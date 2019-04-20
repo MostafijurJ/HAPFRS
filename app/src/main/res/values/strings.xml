@@ -16,6 +16,7 @@
     <string name="input_error_email_invalid">enter a valid email</string>
 
     <string name="Quotes">\" BE CAREFUL ABOUT READING HEALTH BOOKS. YOU MAY DIE OF A MISPRINT. \"</string>
+    <string name="Quote2">\" Eat right, exercise regularly, die anyway.\"</string>
 
     <array name="weightunits">
         <item>Kg</item>

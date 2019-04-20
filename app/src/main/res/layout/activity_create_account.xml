@@ -9,25 +9,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:orientation="vertical"
-        android:padding="@dimen/default_paddingg">
+        android:layout_marginTop="20dp"
+       >
 
         <TextView
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="cursive"
-            android:text="KaJol"
+            android:layout_marginTop="20dp"
+            android:text="@string/Quote2"
             android:textAlignment="center"
-            android:textColor="@color/colorText"
-            android:textSize="@dimen/app_name_size" />
+            android:layout_marginLeft="10dp"
+            android:textSize="30sp"
+            android:fontFamily="serif"
+            android:textStyle="italic|bold"
+             />
 
         <EditText
             android:id="@+id/edit_text_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_name"
+            android:layout_marginTop="10dp"
             android:drawablePadding="@dimen/drawable_padding"
             android:hint="@string/full_name1"
             android:nextFocusDown="@id/edit_text_email"
@@ -90,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Sex :"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                      />
 
@@ -114,7 +117,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Age :"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <EditText

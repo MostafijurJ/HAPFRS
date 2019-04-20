@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".bmiopetation" />
         <activity android:name=".CreateAccount" />
-        <activity android:name=".HistoryPage"></activity>
+        <activity android:name=".HistoryPage" />
+        <activity android:name=".photoes"></activity>
     </application>
 
 </manifest>

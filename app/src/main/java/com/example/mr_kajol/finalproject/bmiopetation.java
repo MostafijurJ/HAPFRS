@@ -65,7 +65,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
     Spinner weightunits;
     Spinner palspiner;
 
-    private Button btnChoose, btnUpload;
+    private Button Photo;
     private ImageView imageView;
     private Uri filePath;
 
@@ -96,9 +96,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         palspiner = findViewById(R.id.palspiner);
         showdata = findViewById(R.id.showdata);
 
-        btnChoose = (Button) findViewById(R.id.btnChoose);
-        btnUpload = (Button) findViewById(R.id.btnUpload);
-        imageView = (ImageView) findViewById(R.id.imgView);
+        Photo = (Button) findViewById(R.id.photo);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -118,14 +116,13 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         buttonLogout = (Button) findViewById(R.id.buttonLogout);
 
         //displaying logged in user name
-        showdata.setText("Welcome : "+user.getEmail());
+        //showdata.setText("Welcome : "+user.getEmail());
 
 
         Historybtn.setOnClickListener(this);
         bmibtn.setOnClickListener(this);
         buttonLogout.setOnClickListener(this);
-        btnChoose.setOnClickListener(this);
-        btnUpload.setOnClickListener(this);
+        Photo.setOnClickListener(this);
 
 
         //Height
@@ -360,15 +357,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                startActivity(i);
                break;
             }
-
-            case R.id.btnChoose:{
-                chooseImage();
-                break;
-            }
-            case R.id.btnUpload:{
-               // uploadImage();
-               break;
-            }
             case R.id.btnhistory:{
                //redirect to histiry Page
 
@@ -377,82 +365,17 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                 break;
             }
 
-        }
+            case R.id.photo:{
 
-    }
-
-
-
-    private void chooseImage() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null )
-        {
-            filePath = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                imageView.setImageBitmap(bitmap);
+                Intent i = new Intent(this, photoes.class);
+                startActivity(i);
+                break;
             }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
+
         }
+
     }
 
-
-
-    private void uploadImage() {
-
-        FirebaseStorage storage;
-        StorageReference storageReference;
-
-
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReferenceFromUrl("gs://health-aware-8d0c8.appspot.com/");
-
-        if(filePath != null)
-        {
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading...");
-            progressDialog.show();
-
-            //"images/"+
-            StorageReference ref = storageReference.child("Image/"+UUID.randomUUID().toString());
-           // StorageReference childRef = ref.child("image.jpg");
-            ref.putFile(filePath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressDialog.dismiss();
-                            Toast.makeText(bmiopetation.this, "Uploaded", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressDialog.dismiss();
-                            Toast.makeText(bmiopetation.this, "Failed.."+e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
-                                    .getTotalByteCount());
-                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
-                        }
-                    });
-        }
-    }
 
 
 

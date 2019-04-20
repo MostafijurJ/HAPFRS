@@ -31,7 +31,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button loginbtn,Photo;
+    private Button loginbtn;
     Button signupbtn;
     EditText LoginUserName, LoginUserPAss;
     TextView tv;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         loginbtn =findViewById(R.id.loginbtn);
         signupbtn =findViewById(R.id.signupbtn);
-        Photo = findViewById(R.id.photo);
+
 
 
         LoginUserName =findViewById(R.id.LoginUserName);
@@ -54,7 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         loginbtn.setOnClickListener(this);
         signupbtn.setOnClickListener(this);
-        Photo.setOnClickListener(this);
+
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -111,12 +112,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.signupbtn:{
 
                Intent i = new Intent(this, CreateAccount.class);
-                startActivity(i);
-               break;
-            }
-            case R.id.photo:{
-
-               Intent i = new Intent(this, photoes.class);
                 startActivity(i);
                break;
             }

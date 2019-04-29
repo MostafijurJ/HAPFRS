@@ -65,10 +65,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
     Spinner weightunits;
     Spinner palspiner;
 
-    private Button Photo;
-    private ImageView imageView;
-    private Uri filePath;
-
 
     private   final int PICK_IMAGE_REQUEST  = 1;
 
@@ -96,7 +92,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         palspiner = findViewById(R.id.palspiner);
         showdata = findViewById(R.id.showdata);
 
-        Photo = (Button) findViewById(R.id.photo);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -122,8 +117,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         Historybtn.setOnClickListener(this);
         bmibtn.setOnClickListener(this);
         buttonLogout.setOnClickListener(this);
-        Photo.setOnClickListener(this);
-
 
         //Height
         ArrayAdapter<CharSequence> heightadepter = ArrayAdapter.createFromResource(this,R.array.heightunits, android.R.layout.simple_spinner_item);
@@ -234,8 +227,8 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                // fractional = (Height - temp)*10;
                 // i inch = 2.54 cm  1 foot = 30.48 cm
                 heightincm = (temp * 2.54);
-                HighttoStore = heightincm.toString();
-                //Toast.makeText(MainActivity.this, "fractional"+heightincm,Toast.LENGTH_LONG).show();
+                String tempheight = new DecimalFormat("##.##").format(heightincm).trim();
+                HighttoStore = tempheight.toString();
             }
             // for weight
             if(weightindex == 0){
@@ -244,7 +237,9 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
             }
             else if(weightindex == 1){
                 weightinkg = (Weight * 0.453592);
-                WeighttoStore = weightinkg.toString();
+                String tempWeight = new DecimalFormat("##.##").format(weightinkg).trim();
+                WeighttoStore = tempWeight.toString();
+
             }
 
             //defining physical Activity level
@@ -266,27 +261,11 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
                 String pal = new DecimalFormat("##.##").format(palscore).trim();
 
-                String passHeight =  HighttoStore.trim();
-                String passWeight =  WeighttoStore.trim();
+                String passHeight =  HighttoStore;
+                String passWeight =  WeighttoStore;
 
-
-            FirebaseUser user = mAuth.getCurrentUser();
-            FirebaseDatabase data = FirebaseDatabase.getInstance();
-            DatabaseReference MyRefff = data.getReference("Users");
-
-              UpdateClass updateClass =new UpdateClass(
-
-                        passHeight,
-                        passWeight,
-                      pal
-                );
-
-
-              Map<String,Object> map = updateClass.toMap();
-
+                FirebaseUser user = mAuth.getCurrentUser();
                 String userid = user.getUid();
-              MyRefff.child(userid).updateChildren(map);
-
 
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -300,14 +279,54 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                 String date = formattedDate.toString();
                 String time = c.toString();
 
-                Map<String, String> HistoryMap = new HashMap<String, String>();
-                // For History Checking  Height Weight
-                HistoryMap.put("1Height : ", passHeight);
-                HistoryMap.put("2Weight : ", passWeight);
-                HistoryMap.put("4UserId : ", userid);
-                HistoryMap.put("3Time : ", time);
-                HistoryMap.put("5PAL : ", pal);
-                HistoryReff.child(userid).push().setValue(HistoryMap);
+                // Retriving Data from Server
+                FirebaseUser FUser = mAuth.getCurrentUser();
+                String Uuserid = FUser.getUid();
+                DatabaseReference DR;
+
+                String RHeight="", RWeight="";
+                DR = FirebaseDatabase.getInstance().getReference().child("Users").child(userid);
+                DR.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String RHeight = dataSnapshot.child("Height").getValue().toString();
+                        String RWeight = dataSnapshot.child("Weight").getValue().toString();
+
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                if((passHeight.equals(RHeight) ) || (passWeight.equals(RWeight))) {
+                    Toast.makeText(getApplicationContext()," Data are same", Toast.LENGTH_LONG).show();
+                }else{
+                    Map<String, String> HistoryMap = new HashMap<String, String>();
+                    // For History Checking  Height Weight
+                    HistoryMap.put("Height : ", passHeight+" cm");
+                    HistoryMap.put("Weight : ", passWeight+ " Kg");
+                    HistoryMap.put("Date : ", date);
+                    HistoryMap.put("PAL : ", pal);
+                    HistoryReff.child(userid).push().setValue(HistoryMap);
+                }
+
+                // Updating User table's value
+                FirebaseDatabase data = FirebaseDatabase.getInstance();
+                DatabaseReference MyRefff = data.getReference("Users");
+
+                UpdateClass updateClass =new UpdateClass(
+
+                        passHeight,
+                        passWeight,
+                        pal
+                );
+
+
+                Map<String,Object> map = updateClass.toMap();
+                MyRefff.child(userid).updateChildren(map);
+
+
 
 
                 double bmi, temp, check=1;
@@ -361,13 +380,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                //redirect to histiry Page
 
                 Intent i = new Intent(bmiopetation.this, HistoryPage.class);
-                startActivity(i);
-                break;
-            }
-
-            case R.id.photo:{
-
-                Intent i = new Intent(this, photoes.class);
                 startActivity(i);
                 break;
             }

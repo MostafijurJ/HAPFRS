@@ -28,9 +28,9 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class HistoryPage extends AppCompatActivity implements OnClickListener {
+public class HistoryPage extends AppCompatActivity  {
 
-    ListView listView;
+
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     ArrayList<String> arrayList = new ArrayList<>();
@@ -38,8 +38,7 @@ public class HistoryPage extends AppCompatActivity implements OnClickListener {
 
 
     private  FirebaseAuth mAuth;
-    TextView tv,tvhistory;
-    Button histo;
+    TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +48,6 @@ public class HistoryPage extends AppCompatActivity implements OnClickListener {
         mAuth = FirebaseAuth.getInstance();
 
         tv = findViewById(R.id.tv);
-        histo = findViewById(R.id.historybtn);
-        tvhistory = findViewById(R.id.tvhistory);
-
-       histo.setOnClickListener(this);
-
-
     }
 
     @Override
@@ -71,22 +64,37 @@ public class HistoryPage extends AppCompatActivity implements OnClickListener {
             FirebaseUser FUser = mAuth.getCurrentUser();
             String userid = FUser.getUid();
 
-            tv.setText(userid);
             DatabaseReference DR;
-            DR = FirebaseDatabase.getInstance().getReference().child("Users").child(userid);
+            DR = FirebaseDatabase.getInstance().getReference().child("HistoryTable").child(userid).child("push id");
             DR.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String Height =  dataSnapshot.child("Height").getValue().toString();
-                    String Weight = dataSnapshot.child("Weight").getValue().toString();
-                    String Age = dataSnapshot.child("Age").getValue().toString();
-                    String PAL = dataSnapshot.child("PAL").getValue().toString();
-                    String Name = dataSnapshot.child("Name").getValue().toString();
-                    String Email = dataSnapshot.child("Email").getValue().toString();
-                    String Contact_No = dataSnapshot.child("Phone").getValue().toString();
+                   // Iterable<DataSnapshot> root = dataSnapshot.getChildren();
+                  //  Toast.makeText(getApplicationContext(), "ds "+dataSnapshot.getChildren(),Toast.LENGTH_LONG).show();
+                    for (DataSnapshot ds: dataSnapshot.getChildren()) {
+                 //       Toast.makeText(getApplicationContext(), "ds "+ds,Toast.LENGTH_LONG).show();
 
-                    tv.setText("User_Name : "+ Name +"\n" + "User_Email : "+ Email +"\n" +"Height: "+ Height +"\n" + "Weight : " +
-                            Weight + "\n" + "Age : "+ Age + "\n" + "Physical Activity Level : " +PAL);
+                        for (DataSnapshot d: ds.getChildren()) {
+
+                            String Height = d.getKey() + d.getValue() + "\n".toString();
+                            String ch =  d.child("1Height:").getValue(String.class);
+
+                            // tv.append(Height);
+                            tv.append(ch);
+
+                            // Log.e("Count" , ""+dataSnapshot.getChildrenCount());
+                            //String Height = d.child("1Height").getValue().toString();
+                          /*  String Weight = ds.child("Weight").getValue().toString();
+                            String Age = ds.child("Age").getValue().toString();
+                            String PAL = ds.child("PAL").getValue().toString();
+                            String Name = ds.child("Name").getValue().toString();
+                            String Email = ds.child("Email").getValue().toString();
+                            String Contact_No = ds.child("Phone").getValue().toString();*/
+                           /* tv.append(d+": "+ " " +"\n"+ Name + "\n" + "User_Email : " + Email + "\n" + "Height: " + Height + "\n" + "Weight : " +
+                                    Weight + "\n" + "Age : " + Age + "\n" + "Physical Activity Level : " + PAL); */
+                        }
+                    }
+
 
                 }
 
@@ -100,42 +108,4 @@ public class HistoryPage extends AppCompatActivity implements OnClickListener {
     }
 
 
-    @Override
-    public void onClick(View v) {
-
-        switch(v.getId()){
-            case R.id.historybtn:{
-
-
-        FirebaseUser FUser = mAuth.getCurrentUser();
-        String userid = FUser.getUid();
-
-        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference ref = database.child("HistoryTable");
-
-       //  HitoryGetSet  hitoryGetSet = new HitoryGetSet();
-        String Temp="" ;
-        Query phoneQuery = ref.orderByChild("4UserId").equalTo(userid);
-        Temp =  phoneQuery.toString();
-        tvhistory.setText(Temp);
-        phoneQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
-                    HitoryGetSet hitoryGetSet = singleSnapshot.getValue(HitoryGetSet.class);
-                    tvhistory.setText((CharSequence) hitoryGetSet);
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-               // Log.e(TAG, "onCancelled", databaseError.toException());
-            }
-        });
-
-        break;
-            }
-
-
-        }
-    }
 }

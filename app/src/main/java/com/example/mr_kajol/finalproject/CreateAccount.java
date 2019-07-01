@@ -134,14 +134,6 @@ public class CreateAccount extends AppCompatActivity  implements View.OnClickLis
             return;
         }
 
-       /* String sex="";
-
-        if(genderindex == 0){
-            sex ="Male";
-        }
-        else if(genderindex == 1){
-            sex = "Female";
-        }*/
 
 
         // progressBar.setVisibility(View.VISIBLE);
@@ -184,7 +176,7 @@ public class CreateAccount extends AppCompatActivity  implements View.OnClickLis
                                     if (task.isSuccessful()) {
                                         Toast.makeText(CreateAccount.this, getString(R.string.registration_success), Toast.LENGTH_LONG).show();
 
-                                        Intent i = new Intent(CreateAccount.this, MainActivity.class);
+                                        Intent i = new Intent(CreateAccount.this, HomeActivity.class);
                                          startActivity(i);
                                     } else {
                                         //display a failure message

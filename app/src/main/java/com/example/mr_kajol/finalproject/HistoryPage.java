@@ -65,7 +65,7 @@ public class HistoryPage extends AppCompatActivity  {
             String userid = FUser.getUid();
 
             DatabaseReference DR;
-            DR = FirebaseDatabase.getInstance().getReference().child("HistoryTable").child(userid).child("push id");
+            DR = FirebaseDatabase.getInstance().getReference().child("HistoryTable").child(userid);
             DR.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -74,13 +74,13 @@ public class HistoryPage extends AppCompatActivity  {
                     for (DataSnapshot ds: dataSnapshot.getChildren()) {
                  //       Toast.makeText(getApplicationContext(), "ds "+ds,Toast.LENGTH_LONG).show();
 
-                        for (DataSnapshot d: ds.getChildren()) {
+                       // for (DataSnapshot d: ds.getChildren()) {
 
-                            String Height = d.getKey() + d.getValue() + "\n".toString();
-                            String ch =  d.child("1Height:").getValue(String.class);
+                            String Height = ds.getKey() + ds.getValue() + "\n".toString();
+                            //String ch =  d.child("1Height:").getValue(String.class);
 
                             // tv.append(Height);
-                            tv.append(ch);
+                            tv.append(Height);
 
                             // Log.e("Count" , ""+dataSnapshot.getChildrenCount());
                             //String Height = d.child("1Height").getValue().toString();
@@ -92,7 +92,7 @@ public class HistoryPage extends AppCompatActivity  {
                             String Contact_No = ds.child("Phone").getValue().toString();*/
                            /* tv.append(d+": "+ " " +"\n"+ Name + "\n" + "User_Email : " + Email + "\n" + "Height: " + Height + "\n" + "Weight : " +
                                     Weight + "\n" + "Age : " + Age + "\n" + "Physical Activity Level : " + PAL); */
-                        }
+                       // }
                     }
 
 

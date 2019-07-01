@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -64,7 +65,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
     Spinner heightunits;
     Spinner weightunits;
     Spinner palspiner;
-
+    private  String Height="", Weight="";
 
     private   final int PICK_IMAGE_REQUEST  = 1;
 
@@ -181,8 +182,8 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         DR.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String Height = dataSnapshot.child("Height").getValue().toString();
-                String Weight = dataSnapshot.child("Weight").getValue().toString();
+                 Height = dataSnapshot.child("Height").getValue().toString();
+                 Weight = dataSnapshot.child("Weight").getValue().toString();
                // String PAL = dataSnapshot.child("PAL").getValue().toString();
 
                 if(Height==null) Height = "00";
@@ -299,7 +300,10 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                     }
                 });
 
-                if((passHeight.equals(RHeight) ) || (passWeight.equals(RWeight))) {
+                Log.d("PassHeight" , ""+passHeight);
+                Log.d("PassHeight" , ""+passWeight);
+
+                if((passHeight.equals(Height) ) || (passWeight.equals(Weight))) {
                     Toast.makeText(getApplicationContext()," Data are same", Toast.LENGTH_LONG).show();
                 }else{
                     Map<String, String> HistoryMap = new HashMap<String, String>();

@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (mAuth.getCurrentUser() != null) {
             //handle the already login user
 
-            Intent i = new Intent(MainActivity.this, bmiopetation.class);
+            Intent i = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(i);
         }
     }
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 if(task.isSuccessful()){
                                     //start the profile activity
                                     finish();
-                                    startActivity(new Intent(getApplicationContext(), bmiopetation.class));
+                                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                                 }
                                 else{
                                     Toast.makeText(MainActivity.this, "Email Pass Invalid", Toast.LENGTH_LONG).show();

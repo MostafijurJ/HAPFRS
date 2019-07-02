@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button BMI, BMR, KCAL, FS,History,PAL;
+    private Button BMI, BMR, KCAL, FS,History,PAL, signin,signup;
 
 
     @Override
@@ -22,6 +22,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         FS =findViewById(R.id.FoodSuggestBtn);
         History =findViewById(R.id.HistoryBtn);
         PAL =findViewById(R.id.PALButton);
+        signin =findViewById(R.id.SignIn);
+        signup =findViewById(R.id.signup);
 
         BMI.setOnClickListener(this);
         BMR.setOnClickListener(this);
@@ -29,6 +31,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         FS.setOnClickListener(this);
         History.setOnClickListener(this);
         PAL.setOnClickListener(this);
+        signin.setOnClickListener(this);
+        signup.setOnClickListener(this);
 
     }
 
@@ -45,6 +49,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.HistoryBtn:{
 
                 Intent intent = new Intent(HomeActivity.this, HistoryPage.class);
+                startActivity(intent);
+                break;
+            }
+
+            case R.id.signup:{
+
+                Intent intent = new Intent(HomeActivity.this, CreateAccount.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.SignIn:{
+
+                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                 startActivity(intent);
                 break;
             }

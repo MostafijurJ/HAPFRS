@@ -76,7 +76,7 @@ public class HistoryPage extends AppCompatActivity  {
 
                        // for (DataSnapshot d: ds.getChildren()) {
 
-                            String Height = ds.getKey() + ds.getValue() + "\n".toString();
+                            String Height =  ds.getKey()+ ds.getValue() + "\n".toString();
                             //String ch =  d.child("1Height:").getValue(String.class);
 
                             // tv.append(Height);

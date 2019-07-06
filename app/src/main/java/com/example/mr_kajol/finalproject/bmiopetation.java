@@ -50,7 +50,7 @@ import static java.lang.Math.floor;
 
 public class bmiopetation extends AppCompatActivity implements View.OnClickListener {
 
-    Button bmibtn, Historybtn,buttonLogout;
+    Button bmibtn;
     EditText height;
     EditText weight;
 
@@ -78,7 +78,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bmiopetation);
 
-        Historybtn = findViewById(R.id.btnhistory);
         bmibtn = findViewById(R.id.btnbmi);
         height = findViewById(R.id.height);
         weight = findViewById(R.id.weight);
@@ -109,15 +108,12 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         //getting current user
         FirebaseUser user = mAuth.getCurrentUser();
 
-        buttonLogout = (Button) findViewById(R.id.buttonLogout);
+
 
         //displaying logged in user name
         //showdata.setText("Welcome : "+user.getEmail());
 
-
-        Historybtn.setOnClickListener(this);
         bmibtn.setOnClickListener(this);
-        buttonLogout.setOnClickListener(this);
 
         //Height
         ArrayAdapter<CharSequence> heightadepter = ArrayAdapter.createFromResource(this,R.array.heightunits, android.R.layout.simple_spinner_item);
@@ -331,8 +327,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                 MyRefff.child(userid).updateChildren(map);
 
 
-
-
                 double bmi, temp, check=1;
 
             temp = heightincm / 100;
@@ -370,29 +364,11 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
             break;
         }
-
-            case R.id.buttonLogout:{
-                mAuth.signOut();
-                //closing activity
-                finish();
-                //starting login activity
-               Intent i = new Intent(bmiopetation.this, MainActivity.class);
-               startActivity(i);
-               break;
-            }
-            case R.id.btnhistory:{
-               //redirect to histiry Page
-
-                Intent i = new Intent(bmiopetation.this, HistoryPage.class);
-                startActivity(i);
-                break;
-            }
+        
 
         }
 
     }
-
-
 
 
     public  double StatusCheck(Double Bmi){

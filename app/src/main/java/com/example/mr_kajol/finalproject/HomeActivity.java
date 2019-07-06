@@ -3,12 +3,21 @@ package com.example.mr_kajol.finalproject;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button BMI, BMR, KCAL, FS,History,PAL, signin,signup;
+    private CardView BMI, BMR, KCAL, FS,History,PAL, Logout, Updateprof;
+
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -16,23 +25,28 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        BMI =findViewById(R.id.Bmiutton);
-        BMR =findViewById(R.id.BMRButton);
-        KCAL =findViewById(R.id.CalButton);
-        FS =findViewById(R.id.FoodSuggestBtn);
-        History =findViewById(R.id.HistoryBtn);
-        PAL =findViewById(R.id.PALButton);
-        signin =findViewById(R.id.SignIn);
-        signup =findViewById(R.id.signup);
+       BMI =findViewById(R.id.Bmiutton);
+       History =findViewById(R.id.HistoryBtn);
+       Logout = findViewById(R.id.Logout);
+       Updateprof = findViewById(R.id.UpdateProfile);
 
         BMI.setOnClickListener(this);
-        BMR.setOnClickListener(this);
-        KCAL.setOnClickListener(this);
-        FS.setOnClickListener(this);
         History.setOnClickListener(this);
-        PAL.setOnClickListener(this);
-        signin.setOnClickListener(this);
-        signup.setOnClickListener(this);
+        Logout.setOnClickListener(this);
+        Updateprof.setOnClickListener(this);
+
+        mAuth = FirebaseAuth.getInstance();
+
+
+       if(mAuth.getCurrentUser() == null){
+            //closing this activity
+            finish();
+            //starting login activity
+            startActivity(new Intent(this, MainActivity.class));
+        }
+
+        //getting current user
+        FirebaseUser user = mAuth.getCurrentUser();
 
     }
 
@@ -47,13 +61,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
             case R.id.HistoryBtn:{
-
                 Intent intent = new Intent(HomeActivity.this, HistoryPage.class);
                 startActivity(intent);
                 break;
             }
 
-            case R.id.signup:{
+         case R.id.signup:{
 
                 Intent intent = new Intent(HomeActivity.this, CreateAccount.class);
                 startActivity(intent);
@@ -62,6 +75,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.SignIn:{
 
                 Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.UpdateProfile:{
+
+                Intent intent = new Intent(HomeActivity.this, UpdateProfile.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.Logout:{
+
+                mAuth.signOut();
+                Intent intent = new Intent(HomeActivity.this, UserView.class);
                 startActivity(intent);
                 break;
             }

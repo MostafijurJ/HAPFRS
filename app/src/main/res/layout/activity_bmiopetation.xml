@@ -13,8 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:layout_marginLeft="20dp"
+        android:orientation="vertical"
         >
-
     <LinearLayout
         android:layout_width="190dp"
         android:layout_height="wrap_content"
@@ -84,6 +85,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="5dp"
+        android:layout_marginLeft="20dp"
         >
 
         <TextView
@@ -118,14 +120,6 @@
             android:background="@drawable/status"
             />
 
-        <Button
-            android:id="@+id/btnhistory"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/history"
-            />
-
     </LinearLayout>
 
 
@@ -155,14 +149,5 @@
 
         />
 
-    <Button
-        android:id="@+id/buttonLogout"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/logout"
-
-        />
 
 </LinearLayout>

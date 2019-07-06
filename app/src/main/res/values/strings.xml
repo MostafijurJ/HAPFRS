@@ -42,4 +42,16 @@
     </array>
 
 
+    <string name="option1">BMI</string>
+    <string name="option2">BMR</string>
+    <string name="option3">KCAL</string>
+    <string name="option4">FOOD MENU</string>
+    <string name="option5">HISTORY</string>
+    <string name="option6">PAL</string>
+    <string name="option7">LOGIN</string>
+    <string name="option8">REGISTER</string>
+
+    <string name="under">Under Construction</string>
+
+
 </resources>

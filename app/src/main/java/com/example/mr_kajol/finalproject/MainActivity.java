@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         signupbtn =findViewById(R.id.signupbtn);
 
 
-
         LoginUserName =findViewById(R.id.LoginUserName);
         LoginUserPAss =findViewById(R.id.LoginUserPass);
 
@@ -62,13 +61,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
-    @Override
+ @Override
     protected void onStart() {
         super.onStart();
         if (mAuth.getCurrentUser() != null) {
             //handle the already login user
-
             Intent i = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(i);
         }
@@ -99,8 +96,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 //if the task is successfull
                                 if(task.isSuccessful()){
                                     //start the profile activity
+                                    Intent i = new Intent(MainActivity.this, HomeActivity.class);
+                                    startActivity(i);
                                     finish();
-                                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                                 }
                                 else{
                                     Toast.makeText(MainActivity.this, "Email Pass Invalid", Toast.LENGTH_LONG).show();

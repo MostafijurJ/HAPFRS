@@ -69,18 +69,17 @@ public class HistoryPage extends AppCompatActivity  {
             DR.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                   // Iterable<DataSnapshot> root = dataSnapshot.getChildren();
-                  //  Toast.makeText(getApplicationContext(), "ds "+dataSnapshot.getChildren(),Toast.LENGTH_LONG).show();
+
                     for (DataSnapshot ds: dataSnapshot.getChildren()) {
                  //       Toast.makeText(getApplicationContext(), "ds "+ds,Toast.LENGTH_LONG).show();
 
                        // for (DataSnapshot d: ds.getChildren()) {
 
-                            String Height =  ds.getKey()+ ds.getValue() + "\n".toString();
-                            //String ch =  d.child("1Height:").getValue(String.class);
+                            String Height =  ds.getKey() + ds.getValue()+ "\n".toString();
+                            String ch =  ds.child("1Height:").getValue(String.class);
 
-                            // tv.append(Height);
                             tv.append(Height);
+                           // tv.append(ch);
 
                             // Log.e("Count" , ""+dataSnapshot.getChildrenCount());
                             //String Height = d.child("1Height").getValue().toString();

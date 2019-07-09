@@ -364,7 +364,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
             break;
         }
-        
+
 
         }
 

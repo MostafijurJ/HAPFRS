@@ -27,7 +27,8 @@
         <activity android:name=".HistoryPage" />
         <activity android:name=".MainActivity" />
         <activity android:name=".AlluserBmiCal" />
-        <activity android:name=".UpdateProfile"></activity>
+        <activity android:name=".UpdateProfile" />
+        <activity android:name=".AllUserBMR"></activity>
     </application>
 
 </manifest>

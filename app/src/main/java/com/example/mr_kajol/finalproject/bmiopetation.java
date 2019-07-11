@@ -127,7 +127,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
         // Pal Spiner
         ArrayAdapter<CharSequence> paladepter = ArrayAdapter.createFromResource(this,R.array.PalLevel, android.R.layout.simple_spinner_item);
-        weightadepter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        paladepter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         palspiner.setAdapter(paladepter);
 
 

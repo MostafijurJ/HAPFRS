@@ -78,7 +78,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:background="@drawable/circulebackgroundyellow"
+                    android:background="@drawable/circuclebackgroudpurple"
                     android:padding="10dp"
                     android:src="@drawable/bmr"
                     android:layout_width="64dp"
@@ -225,7 +225,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:background="@drawable/circulebackgroundyellow"
+                    android:background="@drawable/circuclebackgroudpurple"
                     android:padding="10dp"
                     android:src="@drawable/login"
                     android:layout_width="64dp"
@@ -270,7 +270,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:background="@drawable/circulebackgroundgreen"
+                    android:background="@drawable/circuclebackgroudpurple"
                     android:padding="10dp"
                     android:src="@drawable/register"
                     android:layout_width="64dp"

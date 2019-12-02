@@ -93,8 +93,6 @@ public class HistoryPage extends AppCompatActivity  {
                                     Weight + "\n" + "Age : " + Age + "\n" + "Physical Activity Level : " + PAL); */
                        // }
                     }
-
-
                 }
 
                 @Override

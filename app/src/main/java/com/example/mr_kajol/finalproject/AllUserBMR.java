@@ -74,7 +74,11 @@ public class AllUserBMR extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
 
-        //BMR (metric) = (10 × weight in kg) + (6.25 × height in cm) - (5 × age in years) + 5
+      /*  Mifflin-St Jeor Equation:
+        For men:
+        BMR = 10W + 6.25H - 5A + 5
+        For women:
+        BMR = 10W + 6.25H - 5A - 161*/
 
         switch (v.getId()){
 
@@ -108,7 +112,7 @@ public class AllUserBMR extends AppCompatActivity implements View.OnClickListene
 
                     String bmr = new DecimalFormat("##.##").format(BM);
                     String Calories = new DecimalFormat("##.##").format(CalNeed);
-                    tv.setText("Your BMR is : " + bmr + "\n" + "Calories Needed: "+ Calories);
+                    tv.setText("Your BMR is : " + bmr + "\n" + " Daily Calories Needed: "+ Calories + "\n");
 
                 }catch (Exception e){ }
 

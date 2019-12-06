@@ -178,9 +178,9 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
         // Retriving Data from Server
         FirebaseUser FUser = mAuth.getCurrentUser();
-        String userid = FUser.getUid();
+        String CurrentUserId = FUser.getUid();
         DatabaseReference DR;
-        DR = FirebaseDatabase.getInstance().getReference().child("Users").child(userid);
+        DR = FirebaseDatabase.getInstance().getReference().child("Users").child(CurrentUserId);
         DR.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -246,22 +246,21 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                 WeighttoStore = tempWeight.toString();
 
             }
-
             //defining physical Activity level
                 double palscore=0;
 
                 if(palindex == 0){
-                    palscore = 1.4;
+                    palscore = 1.2;
                 }
                 else if(palindex == 1){
-                  palscore = 1.55;
+                  palscore = 1.375;
                 } else if(palindex == 2){
-                  palscore = 1.85;
+                  palscore = 1.55;
                 }else if(palindex == 3){
-                  palscore = 2.20;
+                  palscore = 1.725;
                 }
                 else if(palindex == 4){
-                  palscore = 2.4;
+                  palscore = 1.9;
                 }
 
                 String pal = new DecimalFormat("##.##").format(palscore).trim();
@@ -270,7 +269,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                 String passWeight =  WeighttoStore;
 
                 FirebaseUser user = mAuth.getCurrentUser();
-                String userid = user.getUid();
 
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -316,7 +314,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                     HistoryMap.put("Weight : ", passWeight+ " Kg");
                     HistoryMap.put("Date : ", date);
                     HistoryMap.put("PAL : ", pal);
-                    HistoryReff.child(userid).push().setValue(HistoryMap);
+                    HistoryReff.child(Uuserid).push().setValue(HistoryMap);
                 }
 
                 // Updating User table's value
@@ -332,7 +330,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
 
                 Map<String,Object> map = updateClass.toMap();
-                MyRefff.child(userid).updateChildren(map);
+                MyRefff.child(Uuserid).updateChildren(map);
 
 
 
@@ -370,9 +368,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
-
-
 
 
 }

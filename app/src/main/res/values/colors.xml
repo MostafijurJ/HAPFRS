@@ -24,4 +24,10 @@
     <color name="blue">#0000FF</color>
     <color name="navy">#000080</color>
     <color name="black">#000000</color>
+
+
+    <color name="editTextBG">#DADADA</color>
+    <color name="whitee">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="textColor">#6e6e6e</color>
 </resources>

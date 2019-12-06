@@ -65,7 +65,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
     Spinner heightunits;
     Spinner weightunits;
     Spinner palspiner;
-    private  String Height="", Weight="";
 
     private   final int PICK_IMAGE_REQUEST  = 1;
 
@@ -73,6 +72,9 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
     int heightindex, weightindex,palindex;
     Double heightincm, weightinkg;
+
+    private  String Height="", Weight="",  UserAge="", Gender = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -175,7 +177,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
 
         // Retriving Data from Server
-        FirebaseUser FUser = mAuth.getCurrentUser();                                                                                                                                                         urrentUser();
+        FirebaseUser FUser = mAuth.getCurrentUser();
         String userid = FUser.getUid();
         DatabaseReference DR;
         DR = FirebaseDatabase.getInstance().getReference().child("Users").child(userid);
@@ -184,6 +186,8 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                  Height = dataSnapshot.child("Height").getValue().toString();
                  Weight = dataSnapshot.child("Weight").getValue().toString();
+                UserAge = dataSnapshot.child("Age").getValue().toString();
+                Gender = dataSnapshot.child("Sex").getValue().toString();
                // String PAL = dataSnapshot.child("PAL").getValue().toString();
 
                 if(Height==null) Height = "00";
@@ -286,7 +290,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                 DatabaseReference DR;
 
                 String RHeight="", RWeight="";
-                DR = FirebaseDatabase.getInstance().getReference().child("Users").child(userid);
+                DR = FirebaseDatabase.getInstance().getReference().child("Users").child(Uuserid);
                 DR.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -335,58 +339,33 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
                 double bmi, temp, check=1;
 
-            temp = heightincm / 100;
+           /* temp = heightincm / 100;
             check = temp * temp;
             bmi = (weightinkg / check);
             String dc = new DecimalFormat("##.##").format(bmi);
-            tvshowbmi.setText("Your BMI is : " + dc);
+            tvshowbmi.setText("Your BMI is : " + dc);*/
 
-           //bmi status
-            String Status = "Current Status: ";
-            String Status1 = "Very severely underweight.";
-            String Status2 = "Severely underweight";
-            String Status3 = "Underweight";
-            String Status4 = "Normal (healthy weight)";
-            String Status5 = "Overweight";
+                /// (Men) BMR (metric) = (10 × weight in kg) + (6.25 × height in cm) - (5 × age in years) + 5
+                /// (Women)  BMR (metric) = (10 × weight in kg) + (6.25 × height in cm) - (5 × age in years) - 161
 
-                if(StatusCheck(bmi)==-1){
-                    tvbmistatus.setText(Status+Status1);
-                }
-                if(StatusCheck(bmi)==1){
-                    tvbmistatus.setText(Status+Status2);
-                }
-                if(StatusCheck(bmi)==2){
-                    tvbmistatus.setText(Status+Status3);
-                }
-                if(StatusCheck(bmi)==3){
-                    tvbmistatus.setText(Status+Status4);
-                }
-                if(StatusCheck(bmi)==4){
-                    tvbmistatus.setText(Status+Status5);
-                }
-                if(StatusCheck(bmi)==55){
-                    tvbmistatus.setText(Status+"Strongly OverWeight");
-                }
+                double DAge = Double.parseDouble(UserAge);
+                String Male = "Male";
+                Double bmr, Calorie;
+                if(Gender ==Male){
+                    bmr = (10 * weightinkg) + (6.25 * heightincm) - (5 * DAge) + 5;
+                } else bmr = (10 * weightinkg) + (6.25 * heightincm) - (5 * DAge) -161;
+
+                String dc = new DecimalFormat("##.").format(bmr);
+                tvshowbmi.setText("Your BMR is : " + dc);
+
+                Calorie = bmr * palscore;
+                String CAL = new DecimalFormat("##.").format(Calorie);
+                tvbmistatus.setText("Your Required Calorie is : " + CAL);
+
 
             break;
         }
 
-           /* case R.id.buttonLogout:{
-                mAuth.signOut();
-                //closing activity
-                finish();
-                //starting login activity
-               Intent i = new Intent(bmiopetation.this, MainActivity.class);
-               startActivity(i);
-               break;
-            }*/
-          /*  case R.id.btnhistory:{
-               //redirect to histiry Page
-
-                Intent i = new Intent(bmiopetation.this, HistoryPage.class);
-                startActivity(i);
-                break;
-            }*/
 
         }
 
@@ -395,21 +374,5 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
 
 
-    public  double StatusCheck(Double Bmi){
-
-        if(Bmi < 15)
-            return  -1;
-        else if(Bmi > 15 && Bmi < 16)
-            return 1;
-        else if(Bmi >= 16 && Bmi < 18.5)
-            return 2;
-        else if(Bmi > 18.5 && Bmi < 25)
-            return 3;
-        else if(Bmi > 25 && Bmi < 30)
-            return 4;
-        else if(Bmi>30)return 55;
-
-        return 6;
-    }
 
 }

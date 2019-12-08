@@ -48,6 +48,7 @@ public class CreateAccount extends AppCompatActivity  implements View.OnClickLis
         mAuth = FirebaseAuth.getInstance();
 
         findViewById(R.id.button_register).setOnClickListener(this);
+        findViewById(R.id.backtologin).setOnClickListener(this);
 
 
         // GENDER
@@ -197,9 +198,15 @@ public class CreateAccount extends AppCompatActivity  implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_register:
+            case R.id.button_register:{
                 registerUser();
                 break;
+            }
+            case R.id.backtologin:{
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
+            }
+
         }
     }
 

@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:weightSum="4"
+    android:weightSum="3"
     android:orientation="vertical"
     android:padding="5dp"
     android:background="#fcfcfc"
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
+
 
     <LinearLayout
         android:gravity="center"
@@ -21,20 +22,29 @@
         <android.support.v7.widget.CardView
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:layout_margin="10dp"
-            android:id="@+id/Bmiutton"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent">
 
+
             <LinearLayout
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+            <LinearLayout
+                android:id="@+id/Bmiutton"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:background="@drawable/circuclebackgroudpurple"
+                    android:background="@drawable/back2"
                     android:padding="10dp"
                     android:src="@drawable/bmi"
                     android:layout_width="64dp"
@@ -58,44 +68,47 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:layout_margin="10dp"
-            android:id="@+id/BMRcardviewID"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
-
             <LinearLayout
+                android:id="@+id/BMRcardviewID"
                 android:orientation="vertical"
+                android:padding="20dp"
                 android:gravity="center"
-                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:background="@drawable/circulebackgroundyellow"
+                    android:background="@drawable/back2"
                     android:padding="10dp"
                     android:src="@drawable/bmr"
                     android:layout_width="64dp"
                     android:layout_height="64dp" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:text="Checkout Calorie."
+                    />
 
                 <View
                     android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/yellow"
+                    android:background="@color/purple"
                     />
                 <TextView
                     android:textAppearance="?android:textAppearanceLarge"
                     android:textStyle="bold"
                     android:text="@string/option2"
+                    android:textAlignment="center"
                     android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
             </LinearLayout>
 
@@ -103,6 +116,7 @@
 
 
     </LinearLayout>
+
 
     <LinearLayout
         android:gravity="center"
@@ -116,63 +130,79 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"
             android:layout_margin="10dp"
-            android:id="@+id/KCALcardviewID"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+            <LinearLayout
+                android:id="@+id/HistoryBtn"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:background="@drawable/circulebackgroundpink"
+                    android:background="@drawable/historyback"
                     android:padding="10dp"
-                    android:src="@drawable/kcl"
+                    android:src="@drawable/history"
                     android:layout_width="64dp"
                     android:layout_height="64dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:text="Checkout history."
+                    />
 
                 <View
                     android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/silver"
+                    android:background="@color/purple"
                     />
                 <TextView
                     android:textAppearance="?android:textAppearanceLarge"
                     android:textStyle="bold"
-                    android:text="@string/option3"
+                    android:text="@string/option5"
                     android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:layout_margin="10dp"
-            android:id="@+id/FoodsuggestcardviewID"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
-
             <LinearLayout
-                android:orientation="vertical"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:background="@drawable/circulebackgroundgreen"
-                    android:padding="10dp"
+                    android:background="@drawable/foodback"
                     android:src="@drawable/food_suggest"
                     android:layout_width="64dp"
                     android:layout_height="64dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:text="find your food here."
+                    />
 
                 <View
                     android:layout_margin="10dp"
@@ -190,7 +220,11 @@
 
             </LinearLayout>
 
+            </LinearLayout>
+
         </android.support.v7.widget.CardView>
+
+
 
     </LinearLayout>
 
@@ -206,112 +240,40 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"
             android:layout_margin="10dp"
-            android:id="@+id/HistoryBtn"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-
-                    android:background="@drawable/circulebackgroudblue"
-                    android:padding="10dp"
-                    android:src="@drawable/history"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp" />
-
-                <View
-                    android:layout_margin="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/blue"
-                    />
-                <TextView
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:textStyle="bold"
-                    android:text="@string/option5"
-                    android:layout_marginTop="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:layout_margin="10dp"
-            android:id="@+id/PALcardviewID"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
 
             <LinearLayout
+                android:id="@+id/UpdateProfile"
                 android:orientation="vertical"
+                android:padding="20dp"
                 android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:background="@drawable/circuclebackgroudpurple"
-                    android:padding="10dp"
-                    android:src="@drawable/pal"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp" />
-
-                <View
-                    android:layout_margin="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/green"
-                    />
-                <TextView
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:textStyle="bold"
-                    android:text="@string/option6"
-                    android:layout_marginTop="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:gravity="center"
-        android:clipToPadding="false"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
-
-        <android.support.v7.widget.CardView
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:layout_margin="10dp"
-            android:id="@+id/UpdateProfile"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
                 <ImageView
                     android:padding="10dp"
+                    android:background="@drawable/profileback"
                     android:src="@drawable/updateprofile"
                     android:layout_width="64dp"
                     android:layout_height="64dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:text="Update profile here"
+                    />
 
                 <View
                     android:layout_margin="10dp"
@@ -328,35 +290,36 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:layout_margin="10dp"
-            android:id="@+id/Logout"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/Logout"
                 android:orientation="vertical"
+                android:padding="20dp"
                 android:gravity="center"
-                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:background="@drawable/circulebackgroudblue"
+                    android:background="@drawable/logoutback"
                     android:padding="10dp"
                    android:src="@drawable/logout"
                     android:layout_width="64dp"
                     android:layout_height="64dp" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:text="Back to start" />
+
                 <View
                     android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/green"
+                    android:background="@color/purple"
                     />
                 <TextView
                     android:textAppearance="?android:textAppearanceLarge"
@@ -366,8 +329,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
+            </LinearLayout>
+
         </android.support.v7.widget.CardView>
 
     </LinearLayout>
+
+
 
 </LinearLayout>

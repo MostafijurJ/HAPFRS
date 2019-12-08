@@ -46,6 +46,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+
 import static java.lang.Math.floor;
 
 public class bmiopetation extends AppCompatActivity implements View.OnClickListener {
@@ -73,7 +74,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
     int heightindex, weightindex,palindex;
     Double heightincm, weightinkg;
 
-    private  String Height="", Weight="",  UserAge="", Gender = "";
+    private  String Height="", Weight="",  UserAge="", Gender = "",Date= "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,8 +100,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         mAuth = FirebaseAuth.getInstance();
 
 
-
-
         if(mAuth.getCurrentUser() == null){
             //closing this activity
             finish();
@@ -116,10 +115,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         //displaying logged in user name
         //showdata.setText("Welcome : "+user.getEmail());
 
-
-        Historybtn.setOnClickListener(this);
         bmibtn.setOnClickListener(this);
-        buttonLogout.setOnClickListener(this);
 
         //Height
         ArrayAdapter<CharSequence> heightadepter = ArrayAdapter.createFromResource(this,R.array.heightunits, android.R.layout.simple_spinner_item);
@@ -177,8 +173,8 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
 
         // Retriving Data from Server
-        FirebaseUser FUser = mAuth.getCurrentUser();
-        String CurrentUserId = FUser.getUid();
+       /// FirebaseUser FUser = mAuth.getCurrentUser();
+        String CurrentUserId = user.getUid();
         DatabaseReference DR;
         DR = FirebaseDatabase.getInstance().getReference().child("Users").child(CurrentUserId);
         DR.addValueEventListener(new ValueEventListener() {
@@ -186,9 +182,10 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                  Height = dataSnapshot.child("Height").getValue().toString();
                  Weight = dataSnapshot.child("Weight").getValue().toString();
-                UserAge = dataSnapshot.child("Age").getValue().toString();
+                 UserAge = dataSnapshot.child("Age").getValue().toString();
                 Gender = dataSnapshot.child("Sex").getValue().toString();
-               // String PAL = dataSnapshot.child("PAL").getValue().toString();
+                //Date = dataSnapshot.child("Date").getValue().toString();
+
 
                 if(Height==null) Height = "00";
                 else if(Weight==null)Weight= "00";
@@ -196,6 +193,8 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
                 height.setText(Height);
                 weight.setText(Weight);
+                //showdata.setText(Date);
+
                 //pal.setText(PAL);
 
             }
@@ -325,7 +324,8 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
                         passHeight,
                         passWeight,
-                        pal
+                        pal,
+                        date
                 );
 
 
@@ -353,15 +353,42 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                     bmr = (10 * weightinkg) + (6.25 * heightincm) - (5 * DAge) + 5;
                 } else bmr = (10 * weightinkg) + (6.25 * heightincm) - (5 * DAge) -161;
 
-                String dc = new DecimalFormat("##.").format(bmr);
-                tvshowbmi.setText("Your BMR is : " + dc);
 
                 Calorie = bmr * palscore;
                 String CAL = new DecimalFormat("##.").format(Calorie);
-                tvbmistatus.setText("Your Required Calorie is : " + CAL);
+                tvshowbmi.setText("Your Required Calorie is : " + CAL);
+
+                Double NetCAL = Calorie * 0.8;
+
+                String NCAL = new DecimalFormat("##.").format(NetCAL);
+                //tvbmistatus.setText("We Can Diistribute Calorie  : " + NCAL);
 
 
-            break;
+
+
+                DatabaseReference PR;
+                PR = FirebaseDatabase.getInstance().getReference().child("DataSet").child("1");
+                PR.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String ID = dataSnapshot.child("ID").getValue().toString();
+                        String FT = dataSnapshot.child("Fat (g)").getValue().toString();
+                        String CD = dataSnapshot.child("Carbohydrate available (g)").getValue().toString();
+                        String PT = dataSnapshot.child("Protein (g)").getValue().toString();
+                        String Nm = dataSnapshot.child("Food name in Bengali").getValue().toString();
+                       // String RWeight = dataSnapshot.child("Weight").getValue().toString();
+
+                        tvbmistatus.setText(Nm+" ID: "+ID+" FAT: "+FT+" CARBO "+CD +" Protein " +PT);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
+
+                break;
         }
 
 

@@ -7,6 +7,7 @@ import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,9 +16,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private CardView BMI, BMR, KCAL, FS,History,PAL, Logout, Updateprof;
+    private LinearLayout BMI, BMR, KCAL, FS,PAL, Logout, Updateprof;
 
     private FirebaseAuth mAuth;
+    LinearLayout History;
 
 
     @Override

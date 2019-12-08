@@ -42,8 +42,8 @@
     </array>
 
 
-    <string name="option1">BMI</string>
-    <string name="option2">BMR</string>
+    <string name="option1">Take a Tour</string>
+    <string name="option2">CalCulate Calories</string>
     <string name="option3">KCAL</string>
     <string name="option4">FOOD MENU</string>
     <string name="option5">HISTORY</string>

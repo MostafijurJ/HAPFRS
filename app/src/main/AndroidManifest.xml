@@ -25,8 +25,8 @@
         <activity android:name=".bmiopetation" />
         <activity android:name=".CreateAccount" />
         <activity android:name=".HistoryPage" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".AlluserBmiCal" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".UpdateProfile" />
         <activity android:name=".AllUserBMR"></activity>
     </application>

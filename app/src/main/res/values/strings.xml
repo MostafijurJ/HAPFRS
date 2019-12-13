@@ -54,4 +54,8 @@
     <string name="under">Under Construction</string>
 
 
+    <string name="nv">open</string>
+    <string name="nn">close</string>
+
+
 </resources>

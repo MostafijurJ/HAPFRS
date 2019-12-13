@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class User {
-    public String Name, Email, Phone,Password, Height, Weight,Sex,Age,PAL;
+    public String Name, Email, Phone,Password, Height, Weight,Sex,Age,PAL,Date;
 
     public User(){
 
     }
 
-    public User(String name, String email, String phone, String password, String height, String weight, String sex, String age,String PAL) {
+    public User(String name, String email, String phone, String password, String height, String weight, String sex, String age,String PAL, String Date) {
         this.Name = name;
         this.Email = email;
        this.Phone = phone;
@@ -20,5 +20,6 @@ public class User {
        this.Sex = sex;
         this.Age = age;
         this.PAL = PAL;
+        this.Date = Date;
     }
 }

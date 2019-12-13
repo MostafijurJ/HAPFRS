@@ -10,7 +10,6 @@ public class UpdateClass {
 
     }
 
-
     public UpdateClass(String Height, String Weight,String PAL, String Date) {
         this.Height = Height;
         this.Weight = Weight;

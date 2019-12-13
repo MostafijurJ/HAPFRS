@@ -19,6 +19,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import static java.lang.Math.floor;
 
 
@@ -135,6 +139,12 @@ public class CreateAccount extends AppCompatActivity  implements View.OnClickLis
             return;
         }
 
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = df.format(c);
+
+        final String date = formattedDate.toString();
+
 
 
         // progressBar.setVisibility(View.VISIBLE);
@@ -165,7 +175,8 @@ public class CreateAccount extends AppCompatActivity  implements View.OnClickLis
                                     weight,
                                     sex,
                                     age,
-                                    pal
+                                    pal,
+                                    date
                             );
 
                             FirebaseDatabase.getInstance().getReference("Users")

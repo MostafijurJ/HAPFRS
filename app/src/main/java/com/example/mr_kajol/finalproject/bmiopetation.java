@@ -1,11 +1,15 @@
 package com.example.mr_kajol.finalproject;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,10 +21,26 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Toast;
+import android.widget.Toolbar;
+
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -47,11 +67,12 @@ import java.util.Map;
 import java.util.UUID;
 
 
+import static android.widget.Toast.LENGTH_LONG;
 import static java.lang.Math.floor;
 
-public class bmiopetation extends AppCompatActivity implements View.OnClickListener {
+public class bmiopetation extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener{
 
-    Button bmibtn, Historybtn,buttonLogout;
+    Button bmibtn, ShowFood,buttonLogout;
     EditText height;
     EditText weight;
 
@@ -62,10 +83,14 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
     TextView weightTv;
     TextView tvbmistatus;
     TextView showdata;
+    TextView TVLastModifiedDate, TVSetUserName;
 
     Spinner heightunits;
     Spinner weightunits;
     Spinner palspiner;
+
+    private RadioGroup radioGroup;
+    private RadioButton radioGolbtn;
 
     private   final int PICK_IMAGE_REQUEST  = 1;
 
@@ -74,7 +99,14 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
     int heightindex, weightindex,palindex;
     Double heightincm, weightinkg;
 
-    private  String Height="", Weight="",  UserAge="", Gender = "",Date= "";
+    private  String Height="", Weight="",  UserAge="", Gender = "",LastDate= "", UserName="";
+
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle toggle;
+    android.support.v7.widget.Toolbar toolbar;
+    NavigationView navigationView;
+
+    @SuppressLint("RestrictedApi")
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,11 +115,12 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
        // Historybtn = findViewById(R.id.btnhistory);
         bmibtn = findViewById(R.id.btnbmi);
+        ShowFood = findViewById(R.id.showfood);
+
+
         height = findViewById(R.id.height);
         weight = findViewById(R.id.weight);
 
-        tvheight = findViewById(R.id.tvheight);
-        tvweight = findViewById(R.id.tvWeight);
         tvshowbmi = findViewById(R.id.tvshowbmi);
         tvbmistatus = findViewById(R.id.bmistatus);
 
@@ -95,9 +128,36 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         weightunits = findViewById(R.id.weightunits);
         palspiner = findViewById(R.id.palspiner);
         showdata = findViewById(R.id.showdata);
+        TVLastModifiedDate = findViewById(R.id.tvlastmodified);
+        TVSetUserName = findViewById(R.id.setusername);
+        radioGroup = findViewById(R.id.radiogroup);
+
+        drawerLayout=findViewById(R.id.drawableId);
+        toolbar=findViewById(R.id.Toolbar);
+        navigationView=findViewById(R.id.navigationId);
+
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
+
+
+
+        navigationView.setNavigationItemSelectedListener((OnNavigationItemSelectedListener) this);
+
+        toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar, R.string.nv, R.string.nn);
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+
+
+
 
 
         mAuth = FirebaseAuth.getInstance();
+
+
 
 
         if(mAuth.getCurrentUser() == null){
@@ -116,6 +176,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         //showdata.setText("Welcome : "+user.getEmail());
 
         bmibtn.setOnClickListener(this);
+        ShowFood.setOnClickListener(this);
 
         //Height
         ArrayAdapter<CharSequence> heightadepter = ArrayAdapter.createFromResource(this,R.array.heightunits, android.R.layout.simple_spinner_item);
@@ -184,16 +245,18 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                  Weight = dataSnapshot.child("Weight").getValue().toString();
                  UserAge = dataSnapshot.child("Age").getValue().toString();
                 Gender = dataSnapshot.child("Sex").getValue().toString();
-                //Date = dataSnapshot.child("Date").getValue().toString();
+                LastDate = dataSnapshot.child("Date").getValue().toString();
+                UserName = dataSnapshot.child("Name").getValue().toString();
 
 
                 if(Height==null) Height = "00";
                 else if(Weight==null)Weight= "00";
-                    //else if(PAL==null) PAL ="00";
+                else if(LastDate==null) LastDate ="Today";
 
                 height.setText(Height);
                 weight.setText(Weight);
-                //showdata.setText(Date);
+                TVLastModifiedDate.setText(LastDate);
+                TVSetUserName.setText("Mr/Mrs "+UserName);
 
                 //pal.setText(PAL);
 
@@ -206,6 +269,9 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         });
 
     }
+
+
+
 
 
     @Override
@@ -305,7 +371,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                 Log.d("PassHeight" , ""+passWeight);
 
                 if((passHeight.equals(Height) ) || (passWeight.equals(Weight))) {
-                    Toast.makeText(getApplicationContext()," Data are same", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext()," Data are same", LENGTH_LONG).show();
                 }else{
                     Map<String, String> HistoryMap = new HashMap<String, String>();
                     // For History Checking  Height Weight
@@ -335,13 +401,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
 
 
-                double bmi, temp, check=1;
 
-           /* temp = heightincm / 100;
-            check = temp * temp;
-            bmi = (weightinkg / check);
-            String dc = new DecimalFormat("##.##").format(bmi);
-            tvshowbmi.setText("Your BMI is : " + dc);*/
 
                 /// (Men) BMR (metric) = (10 × weight in kg) + (6.25 × height in cm) - (5 × age in years) + 5
                 /// (Women)  BMR (metric) = (10 × weight in kg) + (6.25 × height in cm) - (5 × age in years) - 161
@@ -360,13 +420,30 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
                 Double NetCAL = Calorie * 0.8;
 
-                String NCAL = new DecimalFormat("##.").format(NetCAL);
-                //tvbmistatus.setText("We Can Diistribute Calorie  : " + NCAL);
+
+                /// User Goal Checking with Radio Button
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                // find the radiobutton by returned id
+                radioGolbtn = (RadioButton) findViewById(selectedId);
+                String radioString = radioGolbtn.getText().toString();
+                //tvbmistatus.setText(radioString);
+
+               /* if (radioString.isEmpty()) {
+                    radioGolbtn.setError(getString(R.string.input_error_name));
+                    radioGolbtn.requestFocus();
+                    return;
+                }*/
+
+                if(radioString.equals("Lose Weight"))
+                    NetCAL -= 500.00;
+                else if(radioString.equals("Gain Weight"))
+                    NetCAL += 500.00;
+
+                String NeCAL = new DecimalFormat("##.").format(NetCAL);
+                showdata.setText("We Can Distribute Calorie  : " + NeCAL);
 
 
-
-
-                DatabaseReference PR;
+           /*     DatabaseReference PR;
                 PR = FirebaseDatabase.getInstance().getReference().child("DataSet").child("1");
                 PR.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -384,12 +461,17 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
-                });
+                });*/
 
 
 
                 break;
         }
+            case R.id.showfood:{
+                Intent intent = new Intent(bmiopetation.this, UpdateProfile.class);
+                startActivity(intent);
+                break;
+            }
 
 
         }
@@ -397,4 +479,43 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(toggle.onOptionsItemSelected(item))
+        {
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+
+
+        if(item.getItemId()==R.id.homeMenuId) {
+            Intent intent=new Intent(this,UserView.class);
+            startActivity(intent);
+        }
+
+        if(item.getItemId()==R.id.ChooseFoodMenu) {
+            Intent intent=new Intent(this,UpdateProfile.class);
+            startActivity(intent);
+        }
+        if(item.getItemId()==R.id.profileMenuId) {
+            Intent intent=new Intent(this,bmiopetation.class);
+            startActivity(intent);
+        }
+
+        if(item.getItemId()==R.id.LogoutMenu) {
+            mAuth.signOut();
+            Intent intent=new Intent(this,UserView.class);
+            startActivity(intent);
+        }
+
+
+        return false;
+    }
 }

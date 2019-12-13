@@ -1,252 +1,411 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:openDrawer="end"
     android:layout_width="match_parent"
+    android:id="@+id/drawableId"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="50"
     tools:context=".bmiopetation">
 
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        >
-
-        <android.support.v7.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                >
-
-                <TextView
-                    android:id="@+id/tvheight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Height:"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/height"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="5"
-                    android:hint="height"
-                    android:inputType="numberDecimal"
-                    android:textSize="14sp"
-                    />
-
-                <Spinner
-                    android:id="@+id/heightunits"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:contextClickable="true" />
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp">
-
-        </View>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                >
-
-                <TextView
-                    android:id="@+id/tvWeight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Weight:"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/weight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint=" weight"
-                    android:ems="5"
-                    android:inputType="numberDecimal"
-                    android:textSize="14sp"
-                   />
-
-                <Spinner
-                    android:id="@+id/weightunits"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:contextClickable="true"
-                    />
-                </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-    </LinearLayout>
-
-    <android.support.v7.widget.CardView
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        android:layout_marginLeft="20dp"
-        >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvPAL"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:text="Today's Activity:"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <Spinner
-            android:id="@+id/palspiner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            >
-        </Spinner>
-
-    </LinearLayout>
-
-    </android.support.v7.widget.CardView>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp"
-        android:layout_marginLeft="20dp"
-        >
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Choose Your Weight Goal"
-            android:textStyle="bold"
-            />
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <RadioGroup
-            android:id="@+id/radiogroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-
-            <RadioButton
-                android:id="@+id/constantweight"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/Toolbar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Constant "
-                />
-            <RadioButton
-                android:id="@+id/gainweight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Gain Weight"
-                /> <RadioButton
-                android:id="@+id/loseweight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Lose Weight"
-                />
-        </RadioGroup>
+                android:layout_height="wrap_content">
 
-        </android.support.v7.widget.CardView>
-    </LinearLayout>
+            </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
+
+            <LinearLayout
+                android:layout_marginTop="50dp"
+                android:id="@+id/lay"
+                android:orientation="vertical"
+                android:background="@color/sample"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp">
+
+                    <TextView
+                        android:id="@+id/updt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Update Profile"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                        android:textColor="@color/blue" />
+
+                    <TextView
+                        android:id="@+id/setusername"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/updt"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Mr. KAJOL"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/updateprofile"
+                        android:background="@drawable/back1"
+
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/datetv"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textSize="18sp"
+                        android:layout_marginRight="5dp"
+                        android:textColor="@color/blue"
+                        android:text="Last Updated"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvlastmodified"
+                        android:layout_below="@id/datetv"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp"
+                        android:textSize="15sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:text=""
+                        />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+
+
+
+
+            <LinearLayout
+                android:layout_below="@id/lay"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <RelativeLayout
+                        android:id="@+id/relativeLayout1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imageView1"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="19dp"
+                        android:layout_marginRight="30dp">
+
+                        <ImageView
+                            android:id="@+id/imgView_userIcon"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@color/white"
+                            android:padding="8dp"
+                            android:src="@drawable/height"
+                            />
+
+                        <EditText
+                            android:id="@+id/height"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="5"
+                            android:layout_alignBottom="@+id/imgView_userIcon"
+                            android:layout_alignParentTop="true"
+                            android:layout_toRightOf="@+id/imgView_userIcon"
+                            android:background="@color/white"
+                            android:hint="Height..."
+                            android:inputType="numberDecimal"
+                            android:paddingLeft="20dp"
+                            android:textSize="15sp" />
+
+                        <Spinner
+                            android:id="@+id/heightunits"
+                            android:layout_toRightOf="@+id/height"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:contextClickable="true" />
+
+                    </RelativeLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/relativeLayout2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/relativeLayout1"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="30dp">
+
+                        <ImageView
+                            android:id="@+id/imgView_passwordIcon"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@color/white"
+                            android:padding="8dp"
+                            android:src="@drawable/ozon"
+                            />
+
+                        <EditText
+                            android:id="@+id/weight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/imgView_passwordIcon"
+                            android:layout_alignParentTop="true"
+                            android:layout_toRightOf="@+id/imgView_passwordIcon"
+                            android:inputType="numberDecimal"
+                            android:background="@color/white"
+                            android:hint="weight..."
+                            android:ems="5"
+                            android:paddingLeft="20dp"
+                            android:textSize="15sp" />
+
+                        <Spinner
+                            android:id="@+id/weightunits"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:contextClickable="true"
+                            android:layout_toRightOf= "@+id/weight"
+
+                            />
+                    </RelativeLayout>
+                </android.support.v7.widget.CardView>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp">
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cd"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_marginTop="15dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="5dp"
+                            android:layout_marginLeft="10dp"
+                            >
+
+                            <TextView
+                                android:id="@+id/tvPAL"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Activity of this week:"
+                                android:fontFamily="sans-serif-medium"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <Spinner
+                                android:id="@+id/palspiner"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+
+                                >
+                            </Spinner>
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+
+                    <LinearLayout
+                        android:id="@+id/gl"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@id/cd"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="Choose Your Weight Goal:"
+                            android:textStyle="bold"
+                            />
+
+                        <RadioGroup
+                            android:id="@+id/radiogroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            >
+
+                            <RadioButton
+                                android:id="@+id/constantweight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Constant"
+                                />
+                            <RadioButton
+                                android:id="@+id/gainweight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Gain Weight"
+                                />
+                            <RadioButton
+                                android:id="@+id/loseweight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Lose Weight"
+                                />
+                        </RadioGroup>
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/bt"
+                        android:layout_below="@id/gl"
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        >
+                        <Button
+                            android:id="@+id/btnbmi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="2dp"
+                            android:background="@drawable/shape"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="Show Required Calorie"
+                            android:textColor="@color/black"
+                            />
+
+                        <Button
+                            android:id="@+id/showfood"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/shape"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="Choose Food"
+                            android:textColor="@color/black"
+                            />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_below="@id/bt"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+
+                        >
+
+                        <TextView
+                            android:id="@+id/tvshowbmi"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="15dp"
+                            android:textSize="15sp" />
+
+                        <TextView
+
+                            android:id="@+id/bmistatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:textSize="15sp" />
+
+
+                        <TextView
+
+                            android:id="@+id/showdata"
+                            android:layout_marginLeft="15dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+
+                            />
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+    <android.support.design.widget.NavigationView
+
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        >
-        <Button
-            android:id="@+id/btnbmi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="15dp"
-            android:background="@color/colorPrimary"
-            android:fontFamily="sans-serif-medium"
-            android:text="Chcekout"
-            android:textColor="@color/white"
-
-            />
-
-
-    </LinearLayout>
-
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:id="@+id/navigationId"
+        android:background="@color/white"
+        app:menu="@menu/nav_menu_layout"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header"
 
         >
 
-    <TextView
-        android:id="@+id/tvshowbmi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:padding="15dp"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/bmistatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:textSize="18sp" />
+    </android.support.design.widget.NavigationView>
 
 
-    <TextView
-        android:id="@+id/showdata"
-        android:layout_marginLeft="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-
-        />
-    </LinearLayout>
-    </android.support.v7.widget.CardView>
 
 
-</LinearLayout>
+</android.support.v4.widget.DrawerLayout>

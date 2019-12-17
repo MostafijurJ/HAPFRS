@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 //if the task is successfull
                                 if(task.isSuccessful()){
                                     //start the profile activity
-                                    Intent i = new Intent(MainActivity.this, HomeActivity.class);
+                                    Intent i = new Intent(MainActivity.this, bmiopetation.class);
                                     startActivity(i);
                                     finish();
                                 }

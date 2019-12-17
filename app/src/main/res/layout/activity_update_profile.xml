@@ -23,6 +23,7 @@
     </LinearLayout>
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cv1"
         android:layout_marginTop="10dp"
         android:layout_below="@id/lin"
         android:layout_width="wrap_content"
@@ -41,11 +42,12 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/imgView"
+                    android:id="@+id/imgView11"
                     android:layout_width="100dp"
                     android:layout_height="100dp" />
 
                     <TextView
+                        android:id="@+id/tv11"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
@@ -53,6 +55,7 @@
                         android:textSize="12sp"
                         />
                 <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/checkbox11"
                     android:text="Select"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -67,11 +70,12 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/imgView2"
+                    android:id="@+id/imgView12"
                     android:layout_width="100dp"
                     android:layout_height="100dp" />
 
                 <TextView
+                    android:id="@+id/tv12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
@@ -79,12 +83,14 @@
                     android:textSize="12sp"
                     />
                 <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/checkbox12"
                     android:text="Select"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/l13"
                 android:orientation="vertical"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="20sp"
@@ -92,11 +98,12 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/imgView3"
+                    android:id="@+id/imgView13"
                     android:layout_width="100dp"
                     android:layout_height="100dp" />
 
                 <TextView
+                    android:id="@+id/tv13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
@@ -105,6 +112,7 @@
                     />
                 <android.support.v7.widget.AppCompatCheckBox
                     android:text="Select"
+                    android:id="@+id/checkbox13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -112,9 +120,209 @@
 
         </LinearLayout>
 
+    </android.support.v7.widget.CardView>
 
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv2"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/cv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20sp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imgView21"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" />
+
+                <TextView
+                    android:id="@+id/tv21"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Rice"
+                    android:textSize="12sp"
+                    />
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/checkbox21"
+                    android:text="Select"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imgView22"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" />
+
+                <TextView
+                    android:id="@+id/tv22"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Ruti"
+                    android:textSize="12sp"
+                    />
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/checkbox22"
+                    android:text="Select"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/l23"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imgView23"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" />
+
+                <TextView
+                    android:id="@+id/tv23"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Man"
+                    android:textSize="12sp"
+                    />
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:text="Select"
+                    android:id="@+id/checkbox23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv3"
+        android:layout_below="@id/cv2"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20sp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imgView31"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" />
+
+                <TextView
+                    android:id="@+id/tv31"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Rice"
+                    android:textSize="12sp"
+                    />
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/checkbox31"
+                    android:text="Select"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imgView32"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" />
+
+                <TextView
+                    android:id="@+id/tv32"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Ruti"
+                    android:textSize="12sp"
+                    />
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/checkbox32"
+                    android:text="Select"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/l33"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imgView33"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" />
+
+                <TextView
+                    android:id="@+id/tv33"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Man"
+                    android:textSize="12sp"
+                    />
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:text="Select"
+                    android:id="@+id/checkbox33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
 
 
 </RelativeLayout>

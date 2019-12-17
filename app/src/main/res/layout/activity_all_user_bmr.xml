@@ -4,231 +4,274 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
-    android:gravity="center"
-    android:textAlignment="center"
     tools:context=".AllUserBMR">
 
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Height:"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                />
-
-            <EditText
-                android:id="@+id/BMRHeight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="height"
-                android:inputType="numberDecimal"
-                android:textSize="18sp"
-                />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="(cm)"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-        </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        >
-    <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            >
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Weight:"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                />
 
-            <EditText
-                android:id="@+id/BMRWeight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Weight"
-                android:inputType="numberDecimal"
-                android:textSize="18sp"
-                />
+        <LinearLayout
+            android:id="@+id/first"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:background="@drawable/profilebackground"
+                        android:layout_marginTop="00dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/kajol"
+                        />
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text=" Mostafijur Rahman"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="21sp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_below="@id/pic"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="(cm)"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                />
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_email"
+                        />
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:paddingLeft="20dp"
+                        android:text="mostafijurj@gmail.com"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_phone"
+                        tools:ignore="VectorDrawableCompat" />
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:text="01773126589"
+                        android:fontFamily="sans-serif" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_school_black_24dp"
+                        tools:ignore="VectorDrawableCompat" />
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/varsity"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        >
-        <android.support.v7.widget.CardView
-            android:layout_width="wrap_content"
+
+
+        <LinearLayout
+            android:id="@+id/second"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                >
+                android:id="@+id/pic2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Age:"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    />
+                    android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/Age"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Enter Age"
-                    android:inputType="numberDecimal"
-                    android:textSize="18sp"
-                    />
+                    <ImageView
+                        android:background="@drawable/profilebackground"
+                        android:layout_marginTop="35dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:src="@drawable/person"
+                        />
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="Durjoy Roy"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="21sp" />
+                </LinearLayout>
+
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
-
-    </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        >
-        <android.support.v7.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_below="@id/pic2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                >
+                android:orientation="vertical"
+                android:layout_gravity="center">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sex:"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    />
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <Spinner
-                    android:id="@+id/gender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:entries="@array/SEX"
-                    android:contextClickable="true" />
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_email"
+                        />
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:paddingLeft="20dp"
+                        android:text="durjoycse15@gmail.com"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_phone"
+                        tools:ignore="VectorDrawableCompat" />
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:text="01935607878"
+                        android:fontFamily="sans-serif" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_school_black_24dp"
+                        tools:ignore="VectorDrawableCompat" />
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/varsity"
+                        />
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        >
-        <android.support.v7.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Acitvity Level:"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    />
-
-                <Spinner
-                    android:id="@+id/activitylevel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:entries="@array/PalLevel"
-                    android:contextClickable="true" />
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-    </LinearLayout>
+        </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            <Button
-                android:id="@+id/BMR"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="BMR"
-                android:textStyle="bold"
-                android:textSize="25sp"
-                />
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-
-            android:id="@+id/tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="20sp"
-            />
-
-    </LinearLayout>
-
-
+    </ScrollView>
 
 </LinearLayout>

@@ -89,6 +89,8 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
     Spinner weightunits;
     Spinner palspiner;
 
+    TextView Nav_Name, Nav_Email;
+
     private RadioGroup radioGroup;
     private RadioButton radioGolbtn;
 
@@ -99,7 +101,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
     int heightindex, weightindex,palindex;
     Double heightincm, weightinkg;
 
-    private  String Height="", Weight="",  UserAge="", Gender = "",LastDate= "", UserName="";
+    private  String Height="", Weight="",  UserAge="", Gender = "",LastDate= "", UserName="", UserEmail = "";
 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
@@ -124,6 +126,14 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         tvshowbmi = findViewById(R.id.tvshowbmi);
         tvbmistatus = findViewById(R.id.bmistatus);
 
+        Nav_Name = findViewById(R.id.Nav_personname);
+        Nav_Email = findViewById(R.id.Nav_personemail);
+
+        tvbmistatus = findViewById(R.id.bmistatus);
+        tvbmistatus = findViewById(R.id.bmistatus);
+
+
+
         heightunits = findViewById(R.id.heightunits);
         weightunits = findViewById(R.id.weightunits);
         palspiner = findViewById(R.id.palspiner);
@@ -132,15 +142,15 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         TVSetUserName = findViewById(R.id.setusername);
         radioGroup = findViewById(R.id.radiogroup);
 
+
+        /// Nevigation Bar
         drawerLayout=findViewById(R.id.drawableId);
         toolbar=findViewById(R.id.Toolbar);
         navigationView=findViewById(R.id.navigationId);
 
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
-
 
 
         navigationView.setNavigationItemSelectedListener((OnNavigationItemSelectedListener) this);
@@ -149,7 +159,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-
 
 
 
@@ -247,7 +256,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                 Gender = dataSnapshot.child("Sex").getValue().toString();
                 LastDate = dataSnapshot.child("Date").getValue().toString();
                 UserName = dataSnapshot.child("Name").getValue().toString();
-
+                UserEmail = dataSnapshot.child("Email").getValue().toString();
 
                 if(Height==null) Height = "00";
                 else if(Weight==null)Weight= "00";
@@ -257,6 +266,10 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                 weight.setText(Weight);
                 TVLastModifiedDate.setText(LastDate);
                 TVSetUserName.setText("Mr/Mrs "+UserName);
+
+//               Nav_Email.setText(UserEmail);
+//               Nav_Name.setText(UserName);
+
 
                 //pal.setText(PAL);
 
@@ -434,6 +447,11 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                     return;
                 }*/
 
+                if (TextUtils.isEmpty(radioString)) {
+                    Toast.makeText(bmiopetation.this, "Choose your Goal Please", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if(radioString.equals("Lose Weight"))
                     NetCAL -= 500.00;
                 else if(radioString.equals("Gain Weight"))
@@ -443,32 +461,11 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                 showdata.setText("We Can Distribute Calorie  : " + NeCAL);
 
 
-           /*     DatabaseReference PR;
-                PR = FirebaseDatabase.getInstance().getReference().child("DataSet").child("1");
-                PR.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String ID = dataSnapshot.child("ID").getValue().toString();
-                        String FT = dataSnapshot.child("Fat (g)").getValue().toString();
-                        String CD = dataSnapshot.child("Carbohydrate available (g)").getValue().toString();
-                        String PT = dataSnapshot.child("Protein (g)").getValue().toString();
-                        String Nm = dataSnapshot.child("Food name in Bengali").getValue().toString();
-                       // String RWeight = dataSnapshot.child("Weight").getValue().toString();
-
-                        tvbmistatus.setText(Nm+" ID: "+ID+" FAT: "+FT+" CARBO "+CD +" Protein " +PT);
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });*/
-
-
-
                 break;
         }
             case R.id.showfood:{
-                Intent intent = new Intent(bmiopetation.this, UpdateProfile.class);
+
+               Intent intent = new Intent(bmiopetation.this, UpdateProfile.class);
                 startActivity(intent);
                 break;
             }
@@ -508,12 +505,21 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
             Intent intent=new Intent(this,bmiopetation.class);
             startActivity(intent);
         }
+        if(item.getItemId()==R.id.CheckoutHistoryMenu) {
+            Intent intent=new Intent(this,HistoryPage.class);
+            startActivity(intent);
+        }
 
         if(item.getItemId()==R.id.LogoutMenu) {
             mAuth.signOut();
             Intent intent=new Intent(this,UserView.class);
             startActivity(intent);
         }
+         if(item.getItemId()==R.id.AboutUSMenu) {
+                    mAuth.signOut();
+                    Intent intent=new Intent(this, AboutUs.class);
+                    startActivity(intent);
+                }
 
 
         return false;

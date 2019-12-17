@@ -72,7 +72,7 @@ public class UserView extends AppCompatActivity implements View.OnClickListener 
 
             case R.id.BMRcardviewID:{
 
-                Intent intent = new Intent(UserView.this, AllUserBMR.class);
+                Intent intent = new Intent(UserView.this, ViewRecycle.class);
                 startActivity(intent);
                 break;
             }

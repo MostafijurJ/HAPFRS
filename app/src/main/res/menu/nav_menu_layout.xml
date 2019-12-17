@@ -19,14 +19,19 @@
         <item
             android:id="@+id/profileMenuId"
             android:title="Profile"
-            android:icon="@drawable/ic_update_black_24dp"
+            android:icon="@drawable/ic_person_pin_black_24dp"
             ></item>
 
         <item
-
             android:id="@+id/ChooseFoodMenu"
             android:title="Choose Food"
             android:icon="@drawable/hert"
+            ></item>
+
+        <item
+            android:id="@+id/CheckoutHistoryMenu"
+            android:title="History"
+            android:icon="@drawable/ic_history_black_24dp"
             ></item>
 
         <item
@@ -54,9 +59,9 @@
 
             <item
 
-                android:id="@+id/contactMenuId"
-                android:title="contact"
-                android:icon="@drawable/ic_contact_mail_black_24dp"
+                android:id="@+id/AboutUSMenu"
+                android:title="About Us"
+                android:icon="@drawable/ic_people_outline_black_24dp"
                 ></item>
 
 

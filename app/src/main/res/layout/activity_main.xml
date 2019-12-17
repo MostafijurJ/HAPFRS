@@ -148,7 +148,7 @@
                 android:layout_marginTop="14dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="-62dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/shapeloginbutton"
                 android:fontFamily="sans-serif-medium"
                 android:text="Login"
                 android:textColor="@color/white" />

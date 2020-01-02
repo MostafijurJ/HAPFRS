@@ -4,22 +4,23 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 
-public class ViewHolder extends RecyclerView.ViewHolder {
+public class ViewHolder extends RecyclerView.ViewHolder{
 
     View mView;
+
+
 
     public ViewHolder(View itemView) {
         super(itemView);
 
         mView = itemView;
-
-
     }
 
     //set details to recycler view row  BengaliName,,Fat,;

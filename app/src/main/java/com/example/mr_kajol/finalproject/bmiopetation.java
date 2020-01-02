@@ -1,7 +1,9 @@
 package com.example.mr_kajol.finalproject;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -102,6 +104,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
     Double heightincm, weightinkg;
 
     private  String Height="", Weight="",  UserAge="", Gender = "",LastDate= "", UserName="", UserEmail = "";
+    Double NetCAL=0.0;
 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
@@ -412,10 +415,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                 MyRefff.child(Uuserid).updateChildren(map);
 
 
-
-
-
-
                 /// (Men) BMR (metric) = (10 × weight in kg) + (6.25 × height in cm) - (5 × age in years) + 5
                 /// (Women)  BMR (metric) = (10 × weight in kg) + (6.25 × height in cm) - (5 × age in years) - 161
 
@@ -431,7 +430,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                 String CAL = new DecimalFormat("##.").format(Calorie);
                 tvshowbmi.setText("Your Required Calorie is : " + CAL);
 
-                Double NetCAL = Calorie * 0.8;
+                 NetCAL = Calorie * 0.8;
 
 
                 /// User Goal Checking with Radio Button
@@ -460,18 +459,55 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                 String NeCAL = new DecimalFormat("##.").format(NetCAL);
                 showdata.setText("We Can Distribute Calorie  : " + NeCAL);
 
-
+                showDialog();
                 break;
         }
             case R.id.showfood:{
 
-               Intent intent = new Intent(bmiopetation.this, UpdateProfile.class);
+                String NeCAL = new DecimalFormat("##.").format(NetCAL);
+                Intent intent = new Intent(bmiopetation.this, ViewRecycle.class);
+
+                Bundle bundle = new Bundle();
+                //Add your data to bundle
+                bundle.putString("NetCAL", NeCAL );
+
+                //Add the bundle to the intent
+                intent.putExtras(bundle);
+
                 startActivity(intent);
                 break;
             }
 
 
         }
+
+    }
+
+
+    public void showDialog() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(bmiopetation.this);
+        alert.setTitle("Choose you Food");
+
+        alert.setPositiveButton("tab here", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                ChoosefoodDialog();
+            }
+        });
+
+        alert.create().show();
+    }
+    public void ChoosefoodDialog() {
+        String NeCAL = new DecimalFormat("##.").format(NetCAL);
+        Intent intent = new Intent(bmiopetation.this, ViewRecycle.class);
+
+        Bundle bundle = new Bundle();
+        //Add your data to bundle
+        bundle.putString("NetCAL", NeCAL );
+
+        //Add the bundle to the intent
+        intent.putExtras(bundle);
+
+        startActivity(intent);
 
     }
 

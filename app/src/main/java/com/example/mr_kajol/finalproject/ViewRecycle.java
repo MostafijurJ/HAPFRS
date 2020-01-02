@@ -12,6 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -24,12 +27,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 
+
+
 public class ViewRecycle extends AppCompatActivity {
 
     RecyclerView mrecyclerView;
     FirebaseDatabase mfirebaseDatabase;
     DatabaseReference mRef;
 
+    TextView tvRequiredCal,tvSelectedCAL;
 
 
 
@@ -41,8 +47,22 @@ public class ViewRecycle extends AppCompatActivity {
         /*ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Posts List");*/
 
+        //checkBox = findViewById(R.id.ckk);
+
         mrecyclerView = findViewById(R.id.recyclerView);
         mrecyclerView.setHasFixedSize(true);
+
+
+        tvRequiredCal = findViewById(R.id.tv_required_CAL);
+        tvSelectedCAL = findViewById(R.id.tv_your_Selected_CaL);
+
+        //Get the bundle
+        Bundle bundle = getIntent().getExtras();
+
+        //Extract the data…
+        String RequiredCalorie = bundle.getString("NetCAL");
+
+        tvRequiredCal.setText("Your Required Calorie: "+RequiredCalorie+" KAL");
 
 
         mrecyclerView.setLayoutManager(new LinearLayoutManager(ViewRecycle.this));
@@ -75,6 +95,7 @@ public class ViewRecycle extends AppCompatActivity {
 
             }
         };
+
          mrecyclerView.setAdapter(firebaseRecyclerAdapter);
 
     }

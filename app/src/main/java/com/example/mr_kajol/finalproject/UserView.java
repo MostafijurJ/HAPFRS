@@ -55,7 +55,7 @@ public class UserView extends AppCompatActivity implements View.OnClickListener 
 
         switch (v.getId()){
             case R.id.Bmiutton:{
-                Intent intent = new Intent(UserView.this, AlluserBmiCal.class);
+                Intent intent = new Intent(UserView.this, RecycleTest.class);
                 startActivity(intent);
                 break;
             }

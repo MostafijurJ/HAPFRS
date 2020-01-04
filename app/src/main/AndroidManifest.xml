@@ -31,7 +31,9 @@
         <activity android:name=".UpdateProfile" />
         <activity android:name=".AllUserBMR" />
         <activity android:name=".AboutUs" />
-        <activity android:name=".ViewRecycle"></activity>
+        <activity android:name=".ViewRecycle" />
+        <activity android:name=".Row" />
+        <activity android:name=".RecycleTest"></activity>
     </application>
 
 </manifest>

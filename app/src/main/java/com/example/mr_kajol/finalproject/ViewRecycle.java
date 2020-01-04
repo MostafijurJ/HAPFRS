@@ -84,7 +84,7 @@ public class ViewRecycle extends AppCompatActivity {
         FirebaseRecyclerAdapter<Model,ViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(
 
                 Model.class,
-                R.layout.row,
+                R.layout.activity_row,
                 ViewHolder.class,
                 mRef
 

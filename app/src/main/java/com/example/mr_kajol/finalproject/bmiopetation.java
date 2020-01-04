@@ -496,6 +496,9 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
         alert.create().show();
     }
+
+
+
     public void ChoosefoodDialog() {
         String NeCAL = new DecimalFormat("##.").format(NetCAL);
         Intent intent = new Intent(bmiopetation.this, ViewRecycle.class);

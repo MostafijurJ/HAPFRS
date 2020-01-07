@@ -1,6 +1,7 @@
 package com.example.mr_kajol.finalproject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import static com.example.mr_kajol.finalproject.bmiopetation.MY_PREFS_NAME;
 import static java.lang.Math.floor;
 
 
@@ -46,6 +48,7 @@ public class CreateAccount extends AppCompatActivity  implements View.OnClickLis
         editTextPhone = findViewById(R.id.edit_text_phone);
         Age = findViewById(R.id.UserAge);
         genderspiner = findViewById(R.id.genderspiner);
+
 
 
 
@@ -188,7 +191,7 @@ public class CreateAccount extends AppCompatActivity  implements View.OnClickLis
                                     if (task.isSuccessful()) {
                                         Toast.makeText(CreateAccount.this, getString(R.string.registration_success), Toast.LENGTH_LONG).show();
 
-                                        Intent i = new Intent(CreateAccount.this, HomeActivity.class);
+                                        Intent i = new Intent(CreateAccount.this, bmiopetation.class);
                                          startActivity(i);
                                     } else {
                                         //display a failure message
@@ -216,6 +219,7 @@ public class CreateAccount extends AppCompatActivity  implements View.OnClickLis
             case R.id.backtologin:{
                 Intent i = new Intent(this, MainActivity.class);
                 startActivity(i);
+                break;
             }
 
         }

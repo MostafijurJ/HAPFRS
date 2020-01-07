@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -103,8 +104,9 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
     int heightindex, weightindex,palindex;
     Double heightincm, weightinkg;
 
-    private  String Height="", Weight="",  UserAge="", Gender = "",LastDate= "", UserName="", UserEmail = "";
+    private  String Height="", Weight="",  UserAge="", Gender = "",LastDate= "", UserName="", StoreCalorie = "11", UserEmail;
     Double NetCAL=0.0;
+    private String TotaCal;
 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
@@ -120,7 +122,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
        // Historybtn = findViewById(R.id.btnhistory);
         bmibtn = findViewById(R.id.btnbmi);
-        ShowFood = findViewById(R.id.showfood);
 
 
         height = findViewById(R.id.height);
@@ -188,7 +189,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         //showdata.setText("Welcome : "+user.getEmail());
 
         bmibtn.setOnClickListener(this);
-        ShowFood.setOnClickListener(this);
+
 
         //Height
         ArrayAdapter<CharSequence> heightadepter = ArrayAdapter.createFromResource(this,R.array.heightunits, android.R.layout.simple_spinner_item);
@@ -364,9 +365,70 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                 String time = c.toString();
 
                 // Retriving Data from Server
+
+
+
+                /// (Men) BMR (metric) = (10 × weight in kg) + (6.25 × height in cm) - (5 × age in years) + 5
+                /// (Women)  BMR (metric) = (10 × weight in kg) + (6.25 × height in cm) - (5 × age in years) - 161
+
+                double DAge = Double.parseDouble(UserAge);
+                String Male = "Male";
+                Double bmr, Calorie;
+                if(Gender ==Male){
+                    bmr = (10 * weightinkg) + (6.25 * heightincm) - (5 * DAge) + 5;
+                } else bmr = (10 * weightinkg) + (6.25 * heightincm) - (5 * DAge) -161;
+
+
+                Calorie = bmr * palscore;
+                TotaCal = new DecimalFormat("##.").format(Calorie);
+                //tvshowbmi.setText("Your Required Calorie is : " + CAL);
+
+                 NetCAL = Calorie * 0.8;
+
+
+                /// User Goal Checking with Radio Button
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                // find the radiobutton by returned id
+                radioGolbtn = (RadioButton) findViewById(selectedId);
+                String radioString = radioGolbtn.getText().toString();
+
+
+                if (TextUtils.isEmpty(radioString)) {
+                    Toast.makeText(bmiopetation.this, "Choose your Goal Please", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(radioString.equals("Lose Weight"))
+                    NetCAL -= 500.00;
+                else if(radioString.equals("Gain Weight"))
+                    NetCAL += 500.00;
+
+                String NeCAL = new DecimalFormat("##.").format(NetCAL);
+                showdata.setText("We Can Distribute Calorie  : " + NeCAL);
+
+                StoreCalorie = NeCAL;
+
                 FirebaseUser FUser = mAuth.getCurrentUser();
                 String Uuserid = FUser.getUid();
                 DatabaseReference DR;
+
+                // Updating User table's value
+                FirebaseDatabase data = FirebaseDatabase.getInstance();
+                DatabaseReference MyRefff = data.getReference("Users");
+
+                UpdateClass updateClass =new UpdateClass(
+
+                        passHeight,
+                        passWeight,
+                        pal,
+                        date,
+                        StoreCalorie
+                );
+
+                Map<String,Object> map = updateClass.toMap();
+                MyRefff.child(Uuserid).updateChildren(map);
+
+
 
                 String RHeight="", RWeight="";
                 DR = FirebaseDatabase.getInstance().getReference().child("Users").child(Uuserid);
@@ -383,10 +445,8 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                     }
                 });
 
-                Log.d("PassHeight" , ""+passHeight);
-                Log.d("PassHeight" , ""+passWeight);
 
-                if((passHeight.equals(Height) ) || (passWeight.equals(Weight))) {
+                if((passHeight.equals(RHeight) ) || (passWeight.equals(RWeight))) {
                     Toast.makeText(getApplicationContext()," Data are same", LENGTH_LONG).show();
                 }else{
                     Map<String, String> HistoryMap = new HashMap<String, String>();
@@ -395,88 +455,16 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                     HistoryMap.put("Weight : ", passWeight+ " Kg");
                     HistoryMap.put("Date : ", date);
                     HistoryMap.put("PAL : ", pal);
+                    HistoryMap.put("Calorie", NeCAL);
                     HistoryReff.child(Uuserid).push().setValue(HistoryMap);
                 }
 
-                // Updating User table's value
-                FirebaseDatabase data = FirebaseDatabase.getInstance();
-                DatabaseReference MyRefff = data.getReference("Users");
-
-                UpdateClass updateClass =new UpdateClass(
-
-                        passHeight,
-                        passWeight,
-                        pal,
-                        date
-                );
 
 
-                Map<String,Object> map = updateClass.toMap();
-                MyRefff.child(Uuserid).updateChildren(map);
-
-
-                /// (Men) BMR (metric) = (10 × weight in kg) + (6.25 × height in cm) - (5 × age in years) + 5
-                /// (Women)  BMR (metric) = (10 × weight in kg) + (6.25 × height in cm) - (5 × age in years) - 161
-
-                double DAge = Double.parseDouble(UserAge);
-                String Male = "Male";
-                Double bmr, Calorie;
-                if(Gender ==Male){
-                    bmr = (10 * weightinkg) + (6.25 * heightincm) - (5 * DAge) + 5;
-                } else bmr = (10 * weightinkg) + (6.25 * heightincm) - (5 * DAge) -161;
-
-
-                Calorie = bmr * palscore;
-                String CAL = new DecimalFormat("##.").format(Calorie);
-                tvshowbmi.setText("Your Required Calorie is : " + CAL);
-
-                 NetCAL = Calorie * 0.8;
-
-
-                /// User Goal Checking with Radio Button
-                int selectedId = radioGroup.getCheckedRadioButtonId();
-                // find the radiobutton by returned id
-                radioGolbtn = (RadioButton) findViewById(selectedId);
-                String radioString = radioGolbtn.getText().toString();
-                //tvbmistatus.setText(radioString);
-
-               /* if (radioString.isEmpty()) {
-                    radioGolbtn.setError(getString(R.string.input_error_name));
-                    radioGolbtn.requestFocus();
-                    return;
-                }*/
-
-                if (TextUtils.isEmpty(radioString)) {
-                    Toast.makeText(bmiopetation.this, "Choose your Goal Please", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if(radioString.equals("Lose Weight"))
-                    NetCAL -= 500.00;
-                else if(radioString.equals("Gain Weight"))
-                    NetCAL += 500.00;
-
-                String NeCAL = new DecimalFormat("##.").format(NetCAL);
-                showdata.setText("We Can Distribute Calorie  : " + NeCAL);
 
                 showDialog();
                 break;
         }
-            case R.id.showfood:{
-
-                String NeCAL = new DecimalFormat("##.").format(NetCAL);
-                Intent intent = new Intent(bmiopetation.this, ViewRecycle.class);
-
-                Bundle bundle = new Bundle();
-                //Add your data to bundle
-                bundle.putString("NetCAL", NeCAL );
-
-                //Add the bundle to the intent
-                intent.putExtras(bundle);
-
-                startActivity(intent);
-                break;
-            }
 
 
         }
@@ -486,9 +474,10 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
     public void showDialog() {
         AlertDialog.Builder alert = new AlertDialog.Builder(bmiopetation.this);
-        alert.setTitle("Choose you Food");
 
-        alert.setPositiveButton("tab here", new DialogInterface.OnClickListener() {
+        alert.setTitle("Required Calorie is: " + TotaCal + "CAL");
+
+        alert.setPositiveButton("Choose Your Food", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 ChoosefoodDialog();
             }
@@ -498,10 +487,19 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
 
     public void ChoosefoodDialog() {
         String NeCAL = new DecimalFormat("##.").format(NetCAL);
-        Intent intent = new Intent(bmiopetation.this, ViewRecycle.class);
+
+
+        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putString("name", "Elena");
+        editor.apply();
+
+
+
+        Intent intent = new Intent(bmiopetation.this, RecycleTest.class);
 
         Bundle bundle = new Bundle();
         //Add your data to bundle
@@ -555,7 +553,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
          if(item.getItemId()==R.id.AboutUSMenu) {
-                    mAuth.signOut();
+
                     Intent intent=new Intent(this, AboutUs.class);
                     startActivity(intent);
                 }

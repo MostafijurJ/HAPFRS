@@ -44,7 +44,7 @@ public class UserView extends AppCompatActivity implements View.OnClickListener 
         super.onStart();
         if (mAuth.getCurrentUser() != null) {
             //handle the already login user
-            Intent i = new Intent(UserView.this, HomeActivity.class);
+            Intent i = new Intent(UserView.this, bmiopetation.class);
             startActivity(i);
         }
     }
@@ -73,7 +73,7 @@ public class UserView extends AppCompatActivity implements View.OnClickListener 
 
             case R.id.BMRcardviewID:{
 
-                Intent intent = new Intent(UserView.this, ViewRecycle.class);
+                Intent intent = new Intent(UserView.this, UserView.class);
                 startActivity(intent);
                 break;
             }

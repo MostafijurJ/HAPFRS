@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStart();
         if (mAuth.getCurrentUser() != null) {
             //handle the already login user
-            Intent i = new Intent(MainActivity.this, HomeActivity.class);
+            Intent i = new Intent(MainActivity.this, bmiopetation.class);
             startActivity(i);
         }
     }

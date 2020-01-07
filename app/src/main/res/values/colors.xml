@@ -25,6 +25,8 @@
     <color name="navy">#000080</color>
     <color name="black">#000000</color>
 
+    <color name="topbar">#1C273E</color>
+
 
     <color name="editTextBG">#DADADA</color>
     <color name="whitee">#FFFFFF</color>

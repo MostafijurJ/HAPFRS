@@ -38,8 +38,8 @@ import static com.example.mr_kajol.finalproject.bmiopetation.MY_PREFS_NAME;
 public class MyAdapter extends  RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     String FoodName;
-    Double FoodValue = 0.0, Carbo = 0.0, Fat=0.0, Protin = 0.0,TotalCal=0.0, SelectCal=0.0;
-    Double CarboCount=0.0, FatCount=0.0, ProtinCount= 0.0;
+    public  static  double FoodValue, Carbon, Fat, Protin,TotalCal, SelectCal=0.0, Carb;
+    public  static double CarboCount=0.0, FatCount=0.0, ProtinCount= 0.0;
 
     Context context;
     ArrayList<Profile> profiles;
@@ -67,20 +67,23 @@ public class MyAdapter extends  RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
         FoodName = profiles.get(position).getBengaliName();
         holder.name.setText(FoodName);
 
-        Carbo = profiles.get(position).getCarbohydrate();
+        Carbon = profiles.get(position).getCarbohydrate();
         Fat = profiles.get(position).getFat();
         Protin = profiles.get(position).getProtein();
 
-        FoodValue = Fat+Carbo+Protin;
+        FoodValue = Carbon;
+        Carb = Carbon - (Fat+Protin);
+
 
         String FAT = new DecimalFormat("##.##").format(Fat);
-        String CAR = new DecimalFormat("##.##").format(Carbo);
+        String CAR = new DecimalFormat("##.##").format(Carbon);
         String Pro = new DecimalFormat("##.##").format(Protin);
 
-        String Value = "Nutrients per 100 gram\nCarbohydrate : "+CAR + "\nProtein : " +Pro + "\nFat : "+FAT;
+        String Value = "Carbohydrate : "+CAR + "\n  Protein : " +Pro + "\n  Fat : "+FAT;
         holder.details.setText(Value);
 
         Picasso.get().load(profiles.get(position).getUrl()).into(holder.FoodImage);
@@ -94,9 +97,7 @@ public class MyAdapter extends  RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return profiles.size();
     }
 
-    Button button;
-    EditText FoodAmount;
-    LinearLayout layout;
+
 
 
     class MyViewHolder extends RecyclerView.ViewHolder
@@ -104,7 +105,9 @@ public class MyAdapter extends  RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         TextView name,details;
         ImageView FoodImage;
         CheckBox checkBox;
-        Button pus;
+        EditText FoodAmount;
+
+
 
 
         public MyViewHolder(final View itemView) {
@@ -114,125 +117,95 @@ public class MyAdapter extends  RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             details = (TextView) itemView.findViewById(R.id.tvdetails);
             FoodImage = (ImageView) itemView.findViewById(R.id.profilePic);
             checkBox = itemView.findViewById(R.id.check);
-            pus = itemView.findViewById(R.id.BtnFoodAmount);
             FoodAmount = itemView.findViewById(R.id.editTExt_EnterAmount);
-            layout = itemView.findViewById(R.id.Layout);
 
-            pus.setVisibility(View.INVISIBLE);
-            FoodAmount.setVisibility(View.INVISIBLE);
 
-            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        }
+
+
+        public void onClick(final int position)
+        {
+            checkBox.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked){
-                        pus.setVisibility(View.VISIBLE);
-                        FoodAmount.setVisibility(View.VISIBLE);
-                        //String FoodAmount = itemView.FoodAmount.getText().toString();
+                public void onClick(View v) {
+
+
+                    double d = profiles.get(position).getCarbohydrate();
+                    double dd = profiles.get(position).getFat();
+                    double ddd = profiles.get(position).getProtein();
+                    double val = d +ddd+dd;
+
+                    if (isIlligible(TotalCal, CarboCount, FatCount, ProtinCount)) {
+
+                        if (checkBox.isChecked()) {
+                            boolean ck =false;
+
+
+                            TotalCal = TotalCal + val;
+                            CarboCount = CarboCount + d;
+                            FatCount = FatCount + dd;
+                            ProtinCount = ProtinCount + ddd ;
+
+                            ck = true;
+                            String TOT = new DecimalFormat("##.##").format(TotalCal);
+                            Toast.makeText(context, TOT + " Calorie is Selected.", Toast.LENGTH_SHORT).show();
+
+                        }
+                        else //if(!checkBox.isChecked())
+                        {
+                            TotalCal = TotalCal -  (val);
+                            CarboCount = CarboCount -  d;
+                            FatCount -= dd;
+                            ProtinCount -= ddd ;
+                            String TOT = new DecimalFormat("##.##").format(TotalCal);
+                            Toast.makeText(context,"Unchecked ~~"+TOT,Toast.LENGTH_LONG).show();
+
+                            if (TotalCal < 0.0)
+                                TotalCal = 0.0;
+                            if (CarboCount < 0.0)
+                                CarboCount = 0.0;
+                            if (FatCount < 0.0)
+                                FatCount = 0.0;
+                            if (ProtinCount < 0.0)
+                                ProtinCount = 0.0;
+                        }
                     }
                     else{
-                        pus.setVisibility(View.INVISIBLE);
-                        FoodAmount.setVisibility(View.INVISIBLE);
+                        if(checkBox.isChecked()== false){
+                            TotalCal = TotalCal - FoodValue;
+                            CarboCount -= Carbon;
+                            FatCount -= Fat;
+                            ProtinCount -= Protin ;
+
+                            if (TotalCal < 0.0)
+                                TotalCal = 0.0;
+                            if (CarboCount < 0.0)
+                                CarboCount = 0.0;
+                            if (FatCount < 0.0)
+                                FatCount = 0.0;
+                            if (ProtinCount < 0.0)
+                                ProtinCount = 0.0;
+                        }
+                        String TOT = new DecimalFormat("##.##").format(TotalCal);
+
+                        Toast.makeText(context,  TOT+"You all ready select your required needs.", Toast.LENGTH_SHORT).show();
+
+                        checkBox.setEnabled(false);
 
                     }
                 }
             });
 
         }
-        public void onClick(final int position)
-        {
-
-           /* checkBox.setOnClickListener(new View.OnClickListener() {
-                @Override
 
 
-                public void onClick(View v) {
-
-                    button.setVisibility(View.INVISIBLE);
-
-
-                    if (isIlligible(TotalCal)) {
-
-                        if (checkBox.isChecked()) {
-
-                            //button.setVisibility(View.VISIBLE);
-
-                            TotalCal += FoodValue;
-                            CarboCount += Carbo;
-                            FatCount += Fat;
-                            ProtinCount += Protin ;
-                            String TOT = new DecimalFormat("##.##").format(TotalCal);
-
-                            Toast.makeText(context, TOT + " Calorie is Selected.", Toast.LENGTH_SHORT).show();
-
-                        } else {
-                            TotalCal = TotalCal - FoodValue;
-                            CarboCount -= Carbo;
-                            FatCount -= Fat;
-                            ProtinCount -= Protin ;
-
-                            if (TotalCal < 0.0)
-                                TotalCal = 0.0;
-                            if (CarboCount < 0.0)
-                                CarboCount = 0.0;
-                            if (FatCount < 0.0)
-                                FatCount = 0.0;
-                            if (ProtinCount < 0.0)
-                                ProtinCount = 0.0;
-                        }
-                    }else{
-                        if(checkBox.isChecked()== false){
-                            TotalCal = TotalCal - FoodValue;
-                            CarboCount -= Carbo;
-                            FatCount -= Fat;
-                            ProtinCount -= Protin ;
-
-                            if (TotalCal < 0.0)
-                                TotalCal = 0.0;
-                            if (CarboCount < 0.0)
-                                CarboCount = 0.0;
-                            if (FatCount < 0.0)
-                                FatCount = 0.0;
-                            if (ProtinCount < 0.0)
-                                ProtinCount = 0.0;
-                        }
-
-                        checkBox.setEnabled(false);
-
-                    }
-                }
-            });*/
-
-         /*   button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                   // openDialog();
-                    Toast.makeText(context,   " Calorie is Selected.", Toast.LENGTH_SHORT).show();
-
-
-                }
-            });*/
-        }
-
-
-
-       /* public void openDialog() {
-            DialogeClass exampleDialog = new DialogeClass();
-           // exampleDialog.show(getSupportFragmentManager(), "example dialog");
-        }
-*/
-
-
-
-
-
-        boolean isIlligible(double totalClorie){
+        boolean isIlligible(double totalClorie, double Car, double Ft,double Pt){
             ///Carb = 45-60, Fat = 20-30, Protin 10-35;
             //Catch data from RecycleTEst Activity
             String Food = recycleTest.getRequiredCalorie();
-
             Double reqFood = Double.parseDouble(Food);
+            reqFood = 300.9;
             Double CarboLow,CarboHigh,FatLow,FatHigh,ProtinLow,ProtinHigh;
-
             CarboLow = reqFood * 0.45;
             CarboHigh = reqFood * 0.60;
             FatLow = reqFood * 0.20;
@@ -240,15 +213,14 @@ public class MyAdapter extends  RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             ProtinLow = reqFood * 0.10;
             ProtinHigh = reqFood * 0.35;
 
-
             if (reqFood < totalClorie)
                 return false;
-           /* if (CarboHigh < c)
+            if (CarboHigh < Car)
                 return false;
-            if (FatHigh < f)
+            if (FatHigh < Ft)
                 return false;
-            if (ProtinHigh < p)
-                return false;*/
+            if (ProtinHigh < Pt)
+                return false;
 
             return true;
         }

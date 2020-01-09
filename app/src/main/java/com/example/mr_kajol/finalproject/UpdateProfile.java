@@ -106,14 +106,14 @@ public class UpdateProfile extends AppCompatActivity {
         });
 
 
-        String urll = "https://firebasestorage.googleapis.com/v0/b/health-aware-8d0c8.appspot.com/o/person.png?alt=media&token=c7d61691-b1cd-452a-9857-cb0e43dcbe36";
+        //String urll = "https://firebasestorage.googleapis.com/v0/b/health-aware-8d0c8.appspot.com/o/person.png?alt=media&token=c7d61691-b1cd-452a-9857-cb0e43dcbe36";
         String url="https://firebasestorage.googleapis.com/v0/b/health-aware-8d0c8.appspot.com/o/Carbo%2Frice-bowl.jpg?alt=media&token=d09cb07c-a888-4475-aa55-1b21d1acd050";
         String url2 = "https://firebasestorage.googleapis.com/v0/b/health-aware-8d0c8.appspot.com/o/Carbo%2Fruti.jpg?alt=media&token=f5d23e7a-67c2-4eb2-8ae3-ab390593b80c";
 
 
 
         Glide.with(getApplicationContext()).load(url2).into(imageView12);
-       Glide.with(getApplicationContext()).load(urll).into(imageView13);
+       Glide.with(getApplicationContext()).load(url).into(imageView13);
 
 
     }

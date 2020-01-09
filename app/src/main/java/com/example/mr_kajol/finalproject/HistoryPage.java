@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,12 +35,12 @@ public class HistoryPage extends AppCompatActivity  {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    ArrayList<String> arrayList = new ArrayList<>();
-    ArrayAdapter<String> arrayAdapter;
-
+    ArrayList<HitoryGetSet> arrayList;
 
     private  FirebaseAuth mAuth;
-    TextView tv;
+
+    myHistory adap;
+     RecyclerView recycle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +49,13 @@ public class HistoryPage extends AppCompatActivity  {
 
         mAuth = FirebaseAuth.getInstance();
 
-        tv = findViewById(R.id.tv);
-    }
+        recycle = findViewById(R.id.myrec);
+        recycle.setLayoutManager( new LinearLayoutManager(HistoryPage.this));
 
-    @Override
-    protected void onStart() {
-        super.onStart();
         if (mAuth.getCurrentUser() == null) {
             //handle the already login user
             Toast.makeText(HistoryPage.this,"No User found",Toast.LENGTH_LONG).show();
-           Intent i = new Intent(HistoryPage.this, bmiopetation.class);
+           Intent i = new Intent(HistoryPage.this, MainActivity.class);
             startActivity(i);
         }
         else{
@@ -64,44 +63,31 @@ public class HistoryPage extends AppCompatActivity  {
             FirebaseUser FUser = mAuth.getCurrentUser();
             String userid = FUser.getUid();
 
-            DatabaseReference DR;
-            DR = FirebaseDatabase.getInstance().getReference().child("HistoryTable").child(userid);
-            DR.addValueEventListener(new ValueEventListener() {
+            DatabaseReference reference;
+
+            reference = FirebaseDatabase.getInstance().getReference().child("HistoryTable").child(userid);
+            reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    arrayList = new ArrayList<HitoryGetSet>();
+                    for(DataSnapshot dsp: dataSnapshot.getChildren())
+                    {
+                        HitoryGetSet p = dsp.getValue(HitoryGetSet.class);
+                        arrayList.add(p);
 
-                    for (DataSnapshot ds: dataSnapshot.getChildren()) {
-                 //       Toast.makeText(getApplicationContext(), "ds "+ds,Toast.LENGTH_LONG).show();
-
-                       // for (DataSnapshot d: ds.getChildren()) {
-
-                            String Height =  ds.getKey() + ds.getValue()+ "\n".toString();
-                            String ch =  ds.child("1Height:").getValue(String.class);
-
-                            tv.append(Height);
-                           // tv.append(ch);
-
-                            // Log.e("Count" , ""+dataSnapshot.getChildrenCount());
-                            //String Height = d.child("1Height").getValue().toString();
-                          /*  String Weight = ds.child("Weight").getValue().toString();
-                            String Age = ds.child("Age").getValue().toString();
-                            String PAL = ds.child("PAL").getValue().toString();
-                            String Name = ds.child("Name").getValue().toString();
-                            String Email = ds.child("Email").getValue().toString();
-                            String Contact_No = ds.child("Phone").getValue().toString();*/
-                           /* tv.append(d+": "+ " " +"\n"+ Name + "\n" + "User_Email : " + Email + "\n" + "Height: " + Height + "\n" + "Weight : " +
-                                    Weight + "\n" + "Age : " + Age + "\n" + "Physical Activity Level : " + PAL); */
-                       // }
+                        adap = new myHistory(HistoryPage.this, arrayList);
+                        recycle.setAdapter(adap);
                     }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    Toast.makeText(HistoryPage.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
                 }
-
             });
+
         }
+
     }
 
 

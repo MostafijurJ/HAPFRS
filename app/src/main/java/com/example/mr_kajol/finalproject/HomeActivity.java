@@ -68,18 +68,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
 
-         case R.id.signup:{
-
-                Intent intent = new Intent(HomeActivity.this, CreateAccount.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.SignIn:{
-
-                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-                startActivity(intent);
-                break;
-            }
             case R.id.UpdateProfile:{
 
                 Intent intent = new Intent(HomeActivity.this, UpdateProfile.class);
@@ -89,7 +77,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.Logout:{
 
                 mAuth.signOut();
-                Intent intent = new Intent(HomeActivity.this, UserView.class);
+                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                 startActivity(intent);
                 break;
             }

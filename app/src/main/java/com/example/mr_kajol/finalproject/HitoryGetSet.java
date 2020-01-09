@@ -2,7 +2,7 @@ package com.example.mr_kajol.finalproject;
 
 public class HitoryGetSet {
 
-    private String Name, Weight, Time, UserId, PAL;
+    private String  Weight, Date, Height, PAL, Calorie;
 
     HitoryGetSet(){
 
@@ -16,20 +16,20 @@ public class HitoryGetSet {
         Weight = weight;
     }
 
-    public String getTime() {
-        return Time;
+    public String getDate() {
+        return Date;
     }
 
-    public void setTime(String time) {
-        Time = time;
+    public void setDate(String date) {
+        Date = date;
     }
 
-    public String getUserId() {
-        return UserId;
+    public String getHeight() {
+        return Height;
     }
 
-    public void setUserId(String userId) {
-        UserId = userId;
+    public void setHeight(String height) {
+        Height = height;
     }
 
     public String getPAL() {
@@ -40,11 +40,11 @@ public class HitoryGetSet {
         this.PAL = PAL;
     }
 
-    public String getName() {
-        return Name;
+    public String getCalorie() {
+        return Calorie;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setCalorie(String calorie) {
+        Calorie = calorie;
     }
 }

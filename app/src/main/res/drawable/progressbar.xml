@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/progressshape">
+        <shape>
+            <gradient android:startColor="#424242"
+                android:endColor="#757575"
+                android:centerColor="#616161"
+                android:angle="90">
+
+            </gradient>
+
+            <size android:width="20dp"
+                android:height="15dp"
+
+                />
+            <corners android:radius="6dp"
+                />
+        </shape>
+    </item>
+
+    <item android:id="@+id/prog">
+        <clip>
+
+            <level-list>
+
+                <item  android:bottom="2dp"
+                    android:top="2dp"
+                    android:left="2dp"
+                    android:right="2dp"
+                    >
+
+                    <shape>
+                        <gradient android:angle="90"
+                            android:centerColor="@color/purple"
+                            android:endColor="@color/red"
+                            android:startColor="@color/sample"
+                            >
+
+                        </gradient>
+
+                    </shape>
+
+
+                </item>
+            </level-list>
+
+        </clip>
+
+    </item>
+
+
+</layer-list>

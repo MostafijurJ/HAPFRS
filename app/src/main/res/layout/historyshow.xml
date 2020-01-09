@@ -8,7 +8,6 @@
     app:cardCornerRadius="3dp"
     app:cardElevation="3dp"
     app:contentPadding="5dp"
-    tools:context=".RecycleDialoge"
     >
 
     <LinearLayout
@@ -18,44 +17,28 @@
         android:layout_marginTop="0dp"
         android:gravity="center"
         android:orientation="vertical">
+
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/histdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="KAJOL"
-            android:textColor="#000"
             android:textSize="22sp"
-            android:textStyle="bold" />
-        <ImageView
-            android:id="@+id/profilePic"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop" />
+            />
         <TextView
-            android:id="@+id/tvdetails"
+            android:id="@+id/histheight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Details"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/editTExt_EnterAmount"
-            android:hint="How much"
-            android:textSize="12sp"
-            android:inputType="number"
+            android:text="KAJOL"
+            android:textSize="22sp"
+             />
+        <TextView
+            android:id="@+id/histoweight"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <CheckBox
-            android:id="@+id/check"
-            android:checked="false"
-            android:textStyle="italic"
-            android:textSize="16sp"
-            android:text="Select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-
+            android:layout_height="wrap_content"
+            android:text="KAJOL"
+            android:textSize="22sp"
+             />
 
 
     </LinearLayout>

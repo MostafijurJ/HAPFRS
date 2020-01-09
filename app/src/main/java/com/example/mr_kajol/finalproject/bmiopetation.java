@@ -86,7 +86,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
     TextView weightTv;
     TextView tvbmistatus;
     TextView showdata;
-    TextView TVLastModifiedDate, TVSetUserName;
+    TextView TVLastModifiedDate, TVSetUserName, tv_Nav_name;
 
     Spinner heightunits;
     Spinner weightunits;
@@ -144,6 +144,8 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
         showdata = findViewById(R.id.showdata);
         TVLastModifiedDate = findViewById(R.id.tvlastmodified);
         TVSetUserName = findViewById(R.id.setusername);
+        //tv_Nav_name = findViewById(R.id.Nav_personname);
+
         radioGroup = findViewById(R.id.radiogroup);
 
 
@@ -182,11 +184,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
         //getting current user
         FirebaseUser user = mAuth.getCurrentUser();
-
-       // buttonLogout = (Button) findViewById(R.id.buttonLogout);
-
-        //displaying logged in user name
-        //showdata.setText("Welcome : "+user.getEmail());
 
         bmibtn.setOnClickListener(this);
 
@@ -270,6 +267,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                 weight.setText(Weight);
                 TVLastModifiedDate.setText(LastDate);
                 TVSetUserName.setText("Mr/Mrs "+UserName);
+                //tv_Nav_name.setText(UserName);
 
 //               Nav_Email.setText(UserEmail);
 //               Nav_Name.setText(UserName);
@@ -298,11 +296,8 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
         switch (v.getId()){
             case R.id.btnbmi:{
-
-
             Double Height = Double.parseDouble(height.getText().toString());
             Double Weight = Double.parseDouble(weight.getText().toString());
-
             //for height
             if(heightindex == 0){
                 heightincm = (Height);
@@ -326,7 +321,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                 weightinkg = (Weight * 0.453592);
                 String tempWeight = new DecimalFormat("##.##").format(weightinkg).trim();
                 WeighttoStore = tempWeight.toString();
-
             }
             //defining physical Activity level
                 double palscore=0;
@@ -344,14 +338,12 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
                 else if(palindex == 4){
                   palscore = 1.9;
                 }
-
                 String pal = new DecimalFormat("##.##").format(palscore).trim();
 
                 String passHeight =  HighttoStore;
                 String passWeight =  WeighttoStore;
 
                 FirebaseUser user = mAuth.getCurrentUser();
-
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference HistoryReff = database.getReference("HistoryTable");
@@ -512,7 +504,6 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(toggle.onOptionsItemSelected(item))
@@ -530,7 +521,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
 
         if(item.getItemId()==R.id.homeMenuId) {
-            Intent intent=new Intent(this,UserView.class);
+            Intent intent=new Intent(this,bmiopetation.class);
             startActivity(intent);
         }
 
@@ -538,10 +529,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
             Intent intent=new Intent(this,UpdateProfile.class);
             startActivity(intent);
         }
-        if(item.getItemId()==R.id.profileMenuId) {
-            Intent intent=new Intent(this,bmiopetation.class);
-            startActivity(intent);
-        }
+
         if(item.getItemId()==R.id.CheckoutHistoryMenu) {
             Intent intent=new Intent(this,HistoryPage.class);
             startActivity(intent);
@@ -549,7 +537,7 @@ public class bmiopetation extends AppCompatActivity implements View.OnClickListe
 
         if(item.getItemId()==R.id.LogoutMenu) {
             mAuth.signOut();
-            Intent intent=new Intent(this,UserView.class);
+            Intent intent=new Intent(this,MainActivity.class);
             startActivity(intent);
         }
          if(item.getItemId()==R.id.AboutUSMenu) {

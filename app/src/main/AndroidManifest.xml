@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UserView">
+        <activity android:name=".AppOpening">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,14 +25,12 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".bmiopetation" />
         <activity android:name=".CreateAccount" />
-        <activity android:name=".AlluserBmiCal" />
         <activity android:name=".HistoryPage" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".UpdateProfile" />
-        <activity android:name=".AllUserBMR" />
         <activity android:name=".AboutUs" />
         <activity android:name=".RecycleTest" />
-        <activity android:name=".RecycleDialoge"></activity>
+        <activity android:name=".RecycleDialoge" />
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

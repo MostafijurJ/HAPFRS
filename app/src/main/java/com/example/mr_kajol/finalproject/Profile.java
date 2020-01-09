@@ -3,13 +3,12 @@ package com.example.mr_kajol.finalproject;
 public class Profile {
 
     String BengaliName, url, EnglishName;
-    Double Fat, Carbohydrate, Protein;
+    double Fat, Carbohydrate, Protein;
 
     Profile(){
-
     }
 
-    public Profile(String bengaliName, String url, String englishName, Double fat, Double carbohydrate, Double protein) {
+    public Profile(String bengaliName, String url, String englishName, double fat, double carbohydrate, double protein) {
         BengaliName = bengaliName;
         this.url = url;
         EnglishName = englishName;
@@ -42,27 +41,27 @@ public class Profile {
         EnglishName = englishName;
     }
 
-    public Double getFat() {
+    public double getFat() {
         return Fat;
     }
 
-    public void setFat(Double fat) {
+    public void setFat(double fat) {
         Fat = fat;
     }
 
-    public Double getCarbohydrate() {
+    public double getCarbohydrate() {
         return Carbohydrate;
     }
 
-    public void setCarbohydrate(Double carbohydrate) {
+    public void setCarbohydrate(double carbohydrate) {
         Carbohydrate = carbohydrate;
     }
 
-    public Double getProtein() {
+    public double getProtein() {
         return Protein;
     }
 
-    public void setProtein(Double protein) {
+    public void setProtein(double protein) {
         Protein = protein;
     }
 }

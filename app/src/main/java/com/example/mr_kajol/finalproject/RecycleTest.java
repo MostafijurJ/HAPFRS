@@ -3,10 +3,12 @@ package com.example.mr_kajol.finalproject;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,9 +31,11 @@ public class RecycleTest extends AppCompatActivity {
     ArrayList<Profile> list;
     MyAdapter adapter;
 
+
     TextView tvRequiredCal,tvSelectedCAL;
     public  static String RequiredCalorie="";
     public Double CalSend=0.0;
+    FloatingActionButton floatingActionButton;
 
     DatabaseReference reference;
 
@@ -48,7 +52,14 @@ public class RecycleTest extends AppCompatActivity {
          Bundle bundle = getIntent().getExtras();
          RequiredCalorie = bundle.getString("NetCAL");
 
-
+         floatingActionButton =findViewById(R.id.fab);
+         floatingActionButton.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Intent intent = new Intent(RecycleTest.this, ShowSelectedItems.class);
+                 startActivity(intent);
+             }
+         });
 
         tvRequiredCal.setText("Your Required Calorie: "+RequiredCalorie+" KAL");
 

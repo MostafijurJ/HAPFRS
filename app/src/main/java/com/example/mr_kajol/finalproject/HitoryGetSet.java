@@ -2,18 +2,10 @@ package com.example.mr_kajol.finalproject;
 
 public class HitoryGetSet {
 
-    private String  Weight, Date, Height, PAL, Calorie;
+    String Date;
+    String Weight, Height, PAL, Calorie;
 
-    HitoryGetSet(){
-
-    }
-
-    public String getWeight() {
-        return Weight;
-    }
-
-    public void setWeight(String weight) {
-        Weight = weight;
+    HitoryGetSet() {
     }
 
     public String getDate() {
@@ -22,6 +14,14 @@ public class HitoryGetSet {
 
     public void setDate(String date) {
         Date = date;
+    }
+
+    public String getWeight() {
+        return Weight;
+    }
+
+    public void setWeight(String weight) {
+        Weight = weight;
     }
 
     public String getHeight() {
@@ -48,3 +48,5 @@ public class HitoryGetSet {
         Calorie = calorie;
     }
 }
+
+

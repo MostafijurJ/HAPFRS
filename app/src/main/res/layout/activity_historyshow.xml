@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="3dp"
     app:cardElevation="3dp"
     app:contentPadding="5dp"
+    tools:context=".historyshow"
     >
 
     <LinearLayout
@@ -31,14 +31,14 @@
             android:layout_height="wrap_content"
             android:text="KAJOL"
             android:textSize="22sp"
-             />
+            />
         <TextView
             android:id="@+id/histoweight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="KAJOL"
             android:textSize="22sp"
-             />
+            />
 
 
     </LinearLayout>

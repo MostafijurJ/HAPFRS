@@ -17,33 +17,35 @@ public class myHistory extends RecyclerView.Adapter<myHistory.mViewholer> {
 
 
     Context context;
-    ArrayList<HitoryGetSet>arrayList;
+    ArrayList<HitoryGetSet>Histo;
 
 
     public myHistory(Context c , ArrayList<HitoryGetSet> p)
     {
         context = c;
-        arrayList = p;
+        Histo = p;
     }
 
     @NonNull
     @Override
     public mViewholer onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new mViewholer(LayoutInflater.from(context).inflate(R.layout.historyshow,viewGroup,false));
+        return new mViewholer(LayoutInflater.from(context).inflate(R.layout.activity_historyshow,viewGroup,false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull mViewholer hold, int i) {
+    public void onBindViewHolder(@NonNull mViewholer hold, int pos) {
 
-        String Date = arrayList.get(i).getDate();
-        String pal = arrayList.get(i).getPAL();
-        String weight = arrayList.get(i).getWeight();
-        String Height = arrayList.get(i).getHeight();
+        String Date = Histo.get(pos).getDate();
+        String  pal = Histo.get(pos).getPAL();
+        String weight = Histo.get(pos).getWeight();
+      /*  String Height = arrayList.get(i).getHeight();
         String Calorie = arrayList.get(i).getCalorie();
+*/
+        hold.date.setText("This text is setted");
+        hold.height.setText(Date);
+        hold.weight.setText("fdgdfg");
 
-        hold.date.setText(Date);
-        hold.height.setText(Height);
-        hold.weight.setText(weight);
+
     }
 
     @Override
@@ -58,10 +60,11 @@ public class myHistory extends RecyclerView.Adapter<myHistory.mViewholer> {
             super(itemView);
 
             date = (TextView) itemView.findViewById(R.id.histdate);
-            height = (TextView) itemView.findViewById(R.id.histdate);
+            height = (TextView) itemView.findViewById(R.id.histheight);
             weight = (TextView) itemView.findViewById(R.id.histoweight);
 
 
         }
+
     }
 }

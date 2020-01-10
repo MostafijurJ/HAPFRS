@@ -43,6 +43,8 @@ public class MyAdapter extends  RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     Context context;
     ArrayList<Profile> profiles;
+    ArrayList<String> SelectedFoods;
+
     ArrayList<String> CalorieList;
 
     RecycleTest recycleTest = new RecycleTest();
@@ -129,11 +131,20 @@ public class MyAdapter extends  RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 @Override
                 public void onClick(View v) {
 
+                    String fd = FoodAmount.getText().toString();
+                    double foodunit = Double.parseDouble(fd);
 
-                    double d = profiles.get(position).getCarbohydrate();
-                    double dd = profiles.get(position).getFat();
-                    double ddd = profiles.get(position).getProtein();
-                    double val = d +ddd+dd;
+                    double carboperH = profiles.get(position).getCarbohydrate();
+                    double fatPerH = profiles.get(position).getFat();
+                    double protinperH = profiles.get(position).getProtein();
+
+                    double unitSelectCarbo =( carboperH * foodunit)/100;
+                    double unitSelectFat =( fatPerH * foodunit)/100;
+                    double unitSelectPro =( protinperH * foodunit)/100;
+
+                    double totalvalue = unitSelectCarbo+ unitSelectFat+ unitSelectPro;
+
+
 
                     if (isIlligible(TotalCal, CarboCount, FatCount, ProtinCount)) {
 
@@ -141,10 +152,15 @@ public class MyAdapter extends  RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                             boolean ck =false;
 
 
-                            TotalCal = TotalCal + val;
-                            CarboCount = CarboCount + d;
-                            FatCount = FatCount + dd;
-                            ProtinCount = ProtinCount + ddd ;
+                            SelectedFoods = new  ArrayList<String>();
+                            SelectedFoods.add(FoodName  + " ~"+fd +" gram");
+
+                            int in = SelectedFoods.size();
+
+                            TotalCal = TotalCal + totalvalue;
+                            CarboCount = CarboCount + unitSelectCarbo;
+                            FatCount = FatCount + unitSelectFat;
+                            ProtinCount = ProtinCount + unitSelectPro ;
 
                             ck = true;
                             String TOT = new DecimalFormat("##.##").format(TotalCal);
@@ -153,12 +169,12 @@ public class MyAdapter extends  RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                         }
                         else //if(!checkBox.isChecked())
                         {
-                            TotalCal = TotalCal -  (val);
-                            CarboCount = CarboCount -  d;
-                            FatCount -= dd;
-                            ProtinCount -= ddd ;
+                            TotalCal = TotalCal -  (totalvalue);
+                            CarboCount = CarboCount -  unitSelectCarbo;
+                            FatCount -= unitSelectFat;
+                            ProtinCount -= unitSelectPro ;
                             String TOT = new DecimalFormat("##.##").format(TotalCal);
-                            Toast.makeText(context,"Unchecked ~~"+TOT,Toast.LENGTH_LONG).show();
+                            //Toast.makeText(context,"Unchecked ~~"+TOT,Toast.LENGTH_LONG).show();
 
                             if (TotalCal < 0.0)
                                 TotalCal = 0.0;

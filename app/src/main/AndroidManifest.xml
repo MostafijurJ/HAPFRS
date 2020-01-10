@@ -30,7 +30,9 @@
         <activity android:name=".AboutUs" />
         <activity android:name=".RecycleTest" />
         <activity android:name=".RecycleDialoge" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".historyshow" />
+        <activity android:name=".ShowSelectedItems"></activity>
     </application>
 
 </manifest>

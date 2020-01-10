@@ -74,15 +74,14 @@ public class HistoryPage extends AppCompatActivity  {
                     {
                         HitoryGetSet p = dsp.getValue(HitoryGetSet.class);
                         arrayList.add(p);
-
+                    }
                         adap = new myHistory(HistoryPage.this, arrayList);
                         recycle.setAdapter(adap);
-                    }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(HistoryPage.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
                 }
             });
 
